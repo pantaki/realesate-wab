@@ -8,7 +8,7 @@ import Workspaces from './Menus/Workspaces'
 import Recent from './Menus/Recent'
 import Starred from './Menus/Starred'
 import Templates from './Menus/Templates'
-// import Profile from './Menus/Profile'
+import Profile from './Menus/Profile'
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Badge from '@mui/material/Badge'
@@ -55,7 +55,7 @@ function AppBar() {
         <Tooltip title="Help" sx={{cursor: 'pointer'}}>
           <HelpOutlineIcon />
         </Tooltip>
-        {/* <Profile /> */}
+        <Profile />
       </Box>
     </Box>
   )
