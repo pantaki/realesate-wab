@@ -16,7 +16,6 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import Tooltip from '@mui/material/Tooltip'
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline'
 
-
 function AppBar() {
   return (
     <Box px={2} sx={{
