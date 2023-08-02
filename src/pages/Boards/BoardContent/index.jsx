@@ -13,5 +13,4 @@ function BoardContent() {
     </Box>
   )
 }
-
 export default BoardContent

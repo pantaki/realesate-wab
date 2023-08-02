@@ -13,5 +13,4 @@ function BoardBar() {
     </Box>
   )
 }
-
 export default BoardBar

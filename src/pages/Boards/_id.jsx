@@ -12,5 +12,4 @@ function Board() {
     </Container>
   )
 }
-
 export default Board
