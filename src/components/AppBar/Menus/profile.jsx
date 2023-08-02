@@ -31,7 +31,7 @@ function Profile() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar 
+          <Avatar
             sx={{ width: 30, height: 30 }}
             alt="avatar"
             src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector.png'
