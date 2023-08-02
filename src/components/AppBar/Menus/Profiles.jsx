@@ -11,7 +11,7 @@ import PersonAdd from '@mui/icons-material/PersonAdd'
 import Settings from '@mui/icons-material/Settings'
 import Logout from '@mui/icons-material/Logout'
 
-function Profile() {
+function Profiles() {
   const [anchorEl, setAnchorEl] = React.useState(null)
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -76,4 +76,4 @@ function Profile() {
     </Box>
   )
 }
-export default Profile
+export default Profiles
