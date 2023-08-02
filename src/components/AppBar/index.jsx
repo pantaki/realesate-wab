@@ -55,7 +55,7 @@ function AppBar() {
         <Tooltip title="Help" sx={{cursor: 'pointer'}}>
           <HelpOutlineIcon />
         </Tooltip>
-        <Profile />
+        {/* <Profile /> */}
       </Box>
     </Box>
   )
