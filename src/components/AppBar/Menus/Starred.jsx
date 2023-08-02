@@ -82,5 +82,4 @@ function Starred() {
     </Box>
   )
 }
-
 export default Starred

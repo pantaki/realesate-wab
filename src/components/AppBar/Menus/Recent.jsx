@@ -69,5 +69,4 @@ function Recent() {
     </Box>
   )
 }
-
 export default Recent

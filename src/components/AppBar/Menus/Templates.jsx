@@ -69,5 +69,4 @@ function Templates() {
     </Box>
   )
 }
-
 export default Templates
