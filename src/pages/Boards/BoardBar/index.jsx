@@ -9,7 +9,7 @@ function BoardBar() {
       display: 'flex',
       alignItems: 'center'
     }}>
-      Board Bar test
+      Board Bar
     </Box>
   )
 }
