@@ -61,5 +61,4 @@ function AppBar() {
     </Box>
   )
 }
-
 export default AppBar
