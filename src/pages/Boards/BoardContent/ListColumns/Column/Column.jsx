@@ -73,7 +73,7 @@ function Column({ column }) {
           }}>
             {column?.title}
           </Typography>
-          <Box>
+          {/* <Box>
             <Tooltip title="More Option">
               <ExpandMoreIcon 
                 sx={{ color: 'text.primary', cursor: 'pointer' }}
@@ -119,7 +119,7 @@ function Column({ column }) {
                 <ListItemText>Archive this column</ListItemText>
               </MenuItem>
             </Menu>
-          </Box>
+          </Box> */}
         </Box>
 
         <ListCards cards={orderedCards} />
