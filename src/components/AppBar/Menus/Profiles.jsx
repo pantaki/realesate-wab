@@ -32,7 +32,7 @@ function Profiles() {
           aria-expanded={open ? 'true' : undefined}
         >
           <Avatar
-            sx={{ width: 30, height: 30 }}
+            sx={{ width: 36, height: 36 }}
             alt="avatar"
             src='https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector.png'
           />
