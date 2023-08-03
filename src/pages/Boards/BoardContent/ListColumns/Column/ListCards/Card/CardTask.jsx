@@ -24,7 +24,8 @@ function CardTask({ card }) {
     // change transform to Translate
     transform: CSS.Translate.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : undefined
+    opacity: isDragging ? 0.5 : undefined,
+    border: isDragging ? '1px solid #2ecc71' : undefined
   }
 
   const shouldShowCardActions = () => {
@@ -32,7 +33,7 @@ function CardTask({ card }) {
   }
 
   return (
-    <Card 
+    <Card
       ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
       sx={{
         cursor: 'pointer',

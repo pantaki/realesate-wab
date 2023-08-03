@@ -49,7 +49,7 @@ function BoardBar({ board }) {
           label={board?.title}
           clickable
         />
-        <Chip
+        {/* <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
           label={capitalizeFirstLetter(board?.type)}
@@ -72,7 +72,7 @@ function BoardBar({ board }) {
           icon={<FilterIcon />}
           label="Filters"
           clickable
-        />
+        /> */}
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Button

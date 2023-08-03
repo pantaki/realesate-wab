@@ -47,11 +47,11 @@ function AppBar() {
         </Box>
 
         <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 1 }}>
-          <Workspaces />
+          {/* <Workspaces />
           <Recent />
           <Starred />
-          <Templates />
-          <Button
+          <Templates /> */}
+          {/* <Button
             sx={{ 
               color: 'white',
               border: 'none',
@@ -61,11 +61,11 @@ function AppBar() {
             startIcon={<LibraryAddIcon />}
           >
             Create
-          </Button>
+          </Button> */}
         </Box>
       </Box>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <TextField 
+        {/* <TextField
           id="outline-search"
           label="Search..."
           type="text"
@@ -98,7 +98,7 @@ function AppBar() {
               '&.Mui-focused fieldset' : { borderColor: 'white' }
             }
           }}
-        />
+        /> */}
 
         <ModeSelect />
 
@@ -107,9 +107,9 @@ function AppBar() {
             <NotificationsIcon sx={{ color: 'white' }} />
           </Badge>
         </Tooltip>
-        <Tooltip title="Help" sx={{cursor: 'pointer'}}>
+        {/* <Tooltip title="Help" sx={{cursor: 'pointer'}}>
           <HelpOutlineIcon sx={{ color: 'white' }} />
-        </Tooltip>
+        </Tooltip> */}
         <Profiles />
       </Box>
     </Box>
