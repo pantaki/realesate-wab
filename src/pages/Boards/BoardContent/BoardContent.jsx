@@ -132,7 +132,7 @@ function BoardContent({ board }) {
     console.log( 'handlDragEnd: ', event)
 
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) {
-
+      console.log('test 3')
       return
     }
 
@@ -141,8 +141,8 @@ function BoardContent({ board }) {
     // check move overline
     if (!active || !over) return
 
-
     if (active.id !== over.id) {
+      console.log('column drap')
       // get position old
       const oldIndex = orderedColumns.findIndex(c => c._id === active.id)
       // get position new
