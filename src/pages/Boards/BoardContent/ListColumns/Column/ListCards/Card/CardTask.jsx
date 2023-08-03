@@ -9,19 +9,37 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+
 function CardTask({ card }) {
+
+  const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
+    id: card._id,
+    data: { ...card }
+  })
+
+  const dndKitCardStyle = {
+    // touchActive: 'none',
+    // change transform to Translate
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? 0.5 : undefined
+  }
 
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
 
   return (
-    <Card sx={{
-      cursor: 'pointer',
-      boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
-      overflow: 'unset',
-      maxWidth: '300px'
-    }}>
+    <Card 
+      ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
+      sx={{
+        cursor: 'pointer',
+        boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
+        overflow: 'unset',
+        maxWidth: '300px'
+      }}>
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
 
       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
