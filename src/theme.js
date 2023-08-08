@@ -15,6 +15,12 @@ const theme = extendTheme({
     columnHeaderHeight: COLUMN_HEADER_HEIGHT,
     columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },
+  taskColor: {
+    task_done: '#01b10a',
+    task_note: '#d10101',
+    task_waiting: '#f5c916',
+    task_grey: '#ababab'
+  },
   colorSchemes: {
     // light: {
     //   palette: {

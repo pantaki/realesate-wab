@@ -1,45 +1,46 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Box from '@mui/material/Box'
 import BoardContent from './BoardContent'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
+import ListCardShort from './ListCardShort/ListCardShort'
 
 const Item = styled(Paper)(({ theme }) => ({
   bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
+  // ...theme.typography.body2,
+  padding: 1,
   textAlign: 'center'
   // color: theme.palette.text.secondary,
 }))
 
 function BoardContentShort({ board }) {
-  console.log('board :', board.span)
 
-  const handleTitle = (boardId, event) => {
-    console.log( 'handleTitle: ', boardId)
+  const [boardConver, SetBoardConver] = useState(board)
 
+  const handleTitle = (board, boardId) => {
+    SetBoardConver({ ...board, span: board?.span === 4 ? 12 : 4, display: board?.span === 4 ? 'block' : 'none' })
   }
-
-  if (board.span === 4) {
+  if (boardConver.span === 4) {
     return (
-      <Box gridColumn={board.span === 4 ? 'span 4' : 'span 12'} display={board.display === 'none' ? 'block' : 'none'}
+      <Box gridColumn={boardConver.span === 4 ? 'span 4' : 'span 12'} display={boardConver.display === 'none' ? 'block' : 'none'}
         sx={{
           bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
           width: '100%',
           p: '10px 0',
-          px: 2
+          transition: '0.7s',
+          px: 1
         }}
       >
         <Item>
-
-          <Box onClick={handleTitle(board?._id)} sx={{
+          <Box onClick={() => handleTitle(boardConver, boardConver?._id)} sx={{
             bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#1762ad'),
             display: 'flex',
-            px: 1,
+            pl: 2,
             justifyContent: 'space-between',
             color: 'white',
-            borderRadius: '6px',
+            borderTopLeftRadius: '5px',
+            borderTopRightRadius: '5px',
             width: '100%',
             transition: '0.7s',
             '&:hover': {
@@ -48,49 +49,48 @@ function BoardContentShort({ board }) {
             }
           }}>
             <Typography variant="h6" sx={{
-              fontSize: '13px',
-              fontWeight: 'bold',
+              fontSize: '14px',
+              fontWeight: '500',
               cursor: 'pointer',
               p: '10px 0'
             }}>
-              {board?.title}
+              {boardConver?.title}
             </Typography>
             <Typography variant="span" sx={{
               fontSize: '1rem',
               fontWeight: 'bold',
               cursor: 'pointer',
-              p: '10px 0'
+              p: '10px 20px',
+              backgroundColor: '#054789'
             }}>
-              {board?.titleNumber}
+              {boardConver?.titleNumber}
             </Typography>
           </Box>
-          <Box>
-            test Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae odit, fugiat placeat at, iure culpa eligendi sequi laboriosam explicabo dicta corporis cum, perspiciatis ad fuga blanditiis nulla libero voluptas quo.
-          </Box>
+          <ListCardShort key={boardConver._id} boardConver={boardConver} />
         </Item>
       </Box>
     )
   }
 
   return (
-    <Box gridColumn={board.span === 4 ? 'span 4' : 'span 12'} display={board.display === 'none' ? 'none' : 'block'}
+    <Box gridColumn={boardConver.span === 4 ? 'span 4' : 'span 12'} display={boardConver.display === 'none' ? 'none' : 'block'}
       sx={{
         bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
         width: '100%',
-        // height: (theme) => theme.trello.boardContentHeight,
-        // display: 'flex',
         p: '10px 0',
-        px: 2
+        px: 3,
+        transition: '0.7s'
       }}
     >
-      <Item>
-        <Box onClick={handleTitle(board?._id)} sx={{
+      <Item sx={{transition: '0.7s'}}>
+        <Box onClick={() => handleTitle(boardConver, boardConver?._id)} sx={{
           bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#1762ad'),
           display: 'flex',
-          px: 2,
+          pl: 2,
           justifyContent: 'space-between',
           color: 'white',
-          borderRadius: '6px',
+          borderTopLeftRadius: '5px',
+          borderTopRightRadius: '5px',
           width: '100%',
           transition: '0.5s',
           '&:hover': {
@@ -104,18 +104,19 @@ function BoardContentShort({ board }) {
             cursor: 'pointer',
             p: '10px 0'
           }}>
-            {board?.title}
+            {boardConver?.title}
           </Typography>
           <Typography variant="span" sx={{
-            fontSize: '1rem',
+            fontSize: '15px',
             fontWeight: 'bold',
             cursor: 'pointer',
-            p: '10px 0'
+            p: '10px 20px',
+            backgroundColor: '#0c4176'
           }}>
-            {board?.titleNumber}
+            {boardConver?.titleNumber}
           </Typography>
         </Box>
-        <BoardContent key={board._id} board={board} />
+        <BoardContent key={boardConver._id} board={boardConver} />
       </Item>
       
     </Box>

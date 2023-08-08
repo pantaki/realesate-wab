@@ -115,7 +115,7 @@ function BoardContent({ board }) {
     setActiveDragItemType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
     setActiveDragItemTypeData(event?.active?.data?.current)
 
-    // neu keo card thi set value cho old column
+    // neu keo card thi set value cho old column 
     if (event?.active?.data?.current?.columnId) {
       setOldColumnWhenDraggingCard(findColumnByCardId(event?.active?.id))
     }

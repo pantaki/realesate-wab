@@ -72,7 +72,7 @@ export const mockData = {
     type: 'public', // 'private'
     ownerIds: [], // Những users là Admin của board
     memberIds: [], // Những users là member bình thường của board
-    columnOrderIds: ['column-id-01', 'column-id-03', 'column-id-02'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
+    columnOrderIds: ['column-id-01', 'column-id-03', 'column-id-02', 'column-id-04', 'column-id-05', 'column-id-06'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards
     titleNumber: 1,
     emailsTotal: 3,
     docsTotal: 2,
@@ -83,13 +83,14 @@ export const mockData = {
       {
         _id: 'column-id-01',
         boardId: 'board-id-01',
-        title: 'Task Column 01',
+        title: 'offer/em',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
             boardId: 'board-id-01',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -97,34 +98,72 @@ export const mockData = {
             comments: ['test comment 01', 'test comment 02'],
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03']
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_done', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_note', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', status: 'task_waiting', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
         ]
       },
       {
         _id: 'column-id-02',
         boardId: 'board-id-01',
-        title: 'Task Column 02',
+        title: 'inspection',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', status: 'task_waiting', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
         ]
       },
       {
         _id: 'column-id-03',
         boardId: 'board-id-01',
-        title: 'Task Column 03',
+        title: 'financing',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-14', boardId: 'board-id-01', columnId: 'column-id-03', status: 'task_waiting', title: 'Title of card 14', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-15', boardId: 'board-id-01', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 15', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+        ]
+      },
+      {
+        _id: 'column-id-04',
+        boardId: 'board-id-01',
+        title: 'title work',
+        cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
+        cards: [
+          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-04', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-04', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-04', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+        ]
+      },
+      {
+        _id: 'column-id-05',
+        boardId: 'board-id-01',
+        title: 'closing',
+        cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
+        cards: [
+          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_note', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-14', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_waiting', title: 'Title of card 14', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-15', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_done', title: 'Title of card 15', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-16', boardId: 'board-id-01', columnId: 'column-id-05', status: 'task_done', title: 'Title of card 16', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+        ]
+      },
+      {
+        _id: 'column-id-06',
+        boardId: 'board-id-01',
+        title: 'extras',
+        cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
+        cards: [
+          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-06', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-06', status: 'task_note', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-06', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
         ]
       }
     ]
@@ -136,7 +175,7 @@ export const mockData = {
     type: 'public', // 'private'
     ownerIds: [], // Những users là Admin của board
     memberIds: [], // Những users là member bình thường của board
-    columnOrderIds: ['column-id-01', 'column-id-03', 'column-id-02'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards,
+    columnOrderIds: ['column-id-01', 'column-id-03', 'column-id-02', 'column-id-04'], // Thứ tự sắp xếp / vị trí của các Columns trong 1 boards,
     titleNumber: 2,
     emailsTotal: 3,
     docsTotal: 2,
@@ -146,14 +185,15 @@ export const mockData = {
     columns: [
       {
         _id: 'column-id-01',
-        boardId: 'board-id-01',
+        boardId: 'board-id-02',
         title: 'Task Column 01',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
-            boardId: 'board-id-01',
+            boardId: 'board-id-02',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -161,40 +201,51 @@ export const mockData = {
             comments: ['test comment 01', 'test comment 02'],
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03'],
             children: [
-              { id: 'card-id-01-1', children: [], boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-              { id: 'card-id-01-2', children: [], boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-              { id: 'card-id-01-3', children: [], boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
-              { id: 'card-id-01-4', children: [], boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
+              { id: 'card-id-01-1', children: [], boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+              { id: 'card-id-01-2', children: [], boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+              { id: 'card-id-01-3', children: [], boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] },
+              { id: 'card-id-01-4', children: [], boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [] }
             ]
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-02', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-03', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_note', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-04', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-05', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-06', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_waiting', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-07', boardId: 'board-id-02', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-02',
-        boardId: 'board-id-01',
+        boardId: 'board-id-02',
         title: 'Task Column 02',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-08', boardId: 'board-id-02', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-09', boardId: 'board-id-02', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-10', boardId: 'board-id-02', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-03',
-        boardId: 'board-id-01',
+        boardId: 'board-id-02',
         title: 'Task Column 03',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-11', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_waiting', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+        ]
+      },
+      {
+        _id: 'column-id-04',
+        boardId: 'board-id-02',
+        title: 'Task Column 03',
+        cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
+        cards: [
+          { _id: 'card-id-11', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-02', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       }
     ]
@@ -216,14 +267,15 @@ export const mockData = {
     columns: [
       {
         _id: 'column-id-01',
-        boardId: 'board-id-01',
+        boardId: 'board-id-03',
         title: 'Task Column 01',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
-            boardId: 'board-id-01',
+            boardId: 'board-id-03',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -232,34 +284,34 @@ export const mockData = {
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03'], 
             children: []
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-02', boardId: 'board-id-03', columnId: 'column-id-01', status: 'task_done', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-03', boardId: 'board-id-03', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-04', boardId: 'board-id-03', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-05', boardId: 'board-id-03', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-06', boardId: 'board-id-03', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-07', boardId: 'board-id-03', columnId: 'column-id-01', status: 'waiting', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-02',
-        boardId: 'board-id-01',
+        boardId: 'board-id-03',
         title: 'Task Column 02',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-08', boardId: 'board-id-03', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-09', boardId: 'board-id-03', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-10', boardId: 'board-id-03', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-03',
-        boardId: 'board-id-01',
+        boardId: 'board-id-03',
         title: 'Task Column 03',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-11', boardId: 'board-id-03', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-03', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-03', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       }
     ]
@@ -281,14 +333,15 @@ export const mockData = {
     columns: [
       {
         _id: 'column-id-01',
-        boardId: 'board-id-01',
+        boardId: 'board-id-04',
         title: 'Task Column 01',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
-            boardId: 'board-id-01',
+            boardId: 'board-id-04',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -297,34 +350,34 @@ export const mockData = {
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03'],
             children: []
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-02', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_done', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-03', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-04', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_note', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-05', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-06', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-07', boardId: 'board-id-04', columnId: 'column-id-01', status: 'task_waiting', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-02',
-        boardId: 'board-id-01',
+        boardId: 'board-id-04',
         title: 'Task Column 02',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-08', boardId: 'board-id-04', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-09', boardId: 'board-id-04', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-10', boardId: 'board-id-04', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-03',
-        boardId: 'board-id-01',
+        boardId: 'board-id-04',
         title: 'Task Column 03',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-11', boardId: 'board-id-04', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-04', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-04', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       }
     ]
@@ -346,14 +399,15 @@ export const mockData = {
     columns: [
       {
         _id: 'column-id-01',
-        boardId: 'board-id-01',
+        boardId: 'board-id-05',
         title: 'Task Column 01',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
-            boardId: 'board-id-01',
+            boardId: 'board-id-05',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -362,34 +416,34 @@ export const mockData = {
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03'],
             children: []
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-02', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_note', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-03', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-04', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-05', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-06', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-07', boardId: 'board-id-05', columnId: 'column-id-01', status: 'task_waiting', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-02',
-        boardId: 'board-id-01',
+        boardId: 'board-id-05',
         title: 'Task Column 02',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-08', boardId: 'board-id-05', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-09', boardId: 'board-id-05', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-10', boardId: 'board-id-05', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-03',
-        boardId: 'board-id-01',
+        boardId: 'board-id-05',
         title: 'Task Column 03',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-11', boardId: 'board-id-05', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-05', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-05', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       }
     ]
@@ -411,14 +465,15 @@ export const mockData = {
     columns: [
       {
         _id: 'column-id-01',
-        boardId: 'board-id-01',
+        boardId: 'board-id-06',
         title: 'Task Column 01',
         cardOrderIds: ['card-id-01', 'card-id-06', 'card-id-03', 'card-id-04', 'card-id-05', 'card-id-02', 'card-id-07'],
         cards: [
           {
             _id: 'card-id-01',
-            boardId: 'board-id-01',
+            boardId: 'board-id-06',
             columnId: 'column-id-01',
+            status: 'task_done',
             title: 'Title of card 01',
             description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
@@ -427,34 +482,34 @@ export const mockData = {
             attachments: ['test attachment 01', 'test attachment 02', 'test attachment 03'],
             children: []
           },
-          { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-04', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-05', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-06', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-07', boardId: 'board-id-01', columnId: 'column-id-01', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-02', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_done', title: 'Title of card Title of card Title of card Title of card Title of card 02', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-03', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_note', title: 'Title of card 03', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-04', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 04', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-05', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 05', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-06', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_done', title: 'Title of card 06', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-07', boardId: 'board-id-06', columnId: 'column-id-01', status: 'task_waiting', title: 'Title of card 07', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-02',
-        boardId: 'board-id-01',
+        boardId: 'board-id-06',
         title: 'Task Column 02',
         cardOrderIds: ['card-id-08', 'card-id-09', 'card-id-10'],
         cards: [
-          { _id: 'card-id-08', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-09', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-10', boardId: 'board-id-01', columnId: 'column-id-02', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-08', boardId: 'board-id-06', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 08', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-09', boardId: 'board-id-06', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 09', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-10', boardId: 'board-id-06', columnId: 'column-id-02', status: 'task_done', title: 'Title of card 10', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       },
       {
         _id: 'column-id-03',
-        boardId: 'board-id-01',
+        boardId: 'board-id-06',
         title: 'Task Column 03',
         cardOrderIds: ['card-id-11', 'card-id-12', 'card-id-13'],
         cards: [
-          { _id: 'card-id-11', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-12', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
-          { _id: 'card-id-13', boardId: 'board-id-01', columnId: 'column-id-03', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
+          { _id: 'card-id-11', boardId: 'board-id-06', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 11', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-12', boardId: 'board-id-06', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 12', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] },
+          { _id: 'card-id-13', boardId: 'board-id-06', columnId: 'column-id-03', status: 'task_done', title: 'Title of card 13', description: null, cover: null, memberIds: [], comments: [], attachments: [], children: [] }
         ]
       }
     ]

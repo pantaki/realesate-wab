@@ -10,8 +10,8 @@ function Board() {
     <Container disableGutters maxWidth={false} sx={{ height: '100vh', backgroundColor:'primary.main' }}>
       <AppBar />
       <BoardBar board={mockData?.board} />
-      <BoardContent board={mockData?.board} />
-      {/* <BoardTaskContent boards={mockData?.boards} /> */}
+      {/* <BoardContent board={mockData?.board} /> */}
+      <BoardTaskContent boards={mockData?.boards} />
     </Container>
   )
 }

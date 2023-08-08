@@ -25,6 +25,7 @@ function ListTask({ tasks }) {
           // p: '10px 0'
         }}>
         {/* {tasks?.map(board => (<BoardContent key={board._id} board={board} Item={Item} />))} */}
+        {/* <BoardContentShort key={tasks[0]._id} board={tasks[0]} /> */}
         {tasks?.map(board => (<BoardContentShort key={board._id} board={board} />))}
       </Box>
     </Box>
