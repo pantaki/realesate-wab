@@ -50,9 +50,9 @@ function Column({ column }) {
         {...listeners}
         sx={{
           minWidth: '300px',
-          minHeight: '300px',
+          minHeight: '700px',
           bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
-          ml: 2,
+          ml: '3px',
           borderRadius: '6px',
           height: 'fit-content',
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
@@ -132,10 +132,10 @@ function Column({ column }) {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          <Button startIcon={<AddCardIcon />}>Add new card</Button>
+          {/* <Button startIcon={<AddCardIcon />}>Add new card</Button>
           <Tooltip title="Drap to move">
             <DragHandleIcon sx={{ cursor: 'pointer' }} />
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       </Box>
     </div>
