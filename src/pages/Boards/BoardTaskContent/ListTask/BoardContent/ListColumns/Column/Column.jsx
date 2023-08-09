@@ -20,6 +20,7 @@ import ListCards from './ListCards/ListCards'
 import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import ListCardsHeader from './ListCardsHeader/ListCardsHeader'
 
 function Column({ column }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
@@ -55,25 +56,37 @@ function Column({ column }) {
           ml: '3px',
           borderRadius: '6px',
           height: 'fit-content',
+          overflow: 'auto',
           maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
         }}>
-
         {/* Box column Header */}
         <Box sx={{
+          backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#cecfd1'),
+          // m: '10px 10%',
+          p: '15px 10px'
+        }}>
+          <Box sx={{
+            p: '10px 0'
+          }}>{column.title}</Box>
+          <ListCardsHeader cards={orderedCards} />
+        </Box>
+        <Box sx={{
           height: (theme) => theme.trello.columnHeaderHeight,
-          p: 2,
+          p: 4,
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'space-between'
+          justifyContent: 'center'
         }}>
           <Typography variant="h6" sx={{
-            fontSize: '1rem',
+            fontSize: '21px',
             fontWeight: 'bold',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            p: '10px 0',
+            textTransform: 'uppercase'
           }}>
             {column?.title}
           </Typography>
-          <Box>
+          {/* <Box>
             <Tooltip title="More Option">
               <ExpandMoreIcon
                 sx={{ color: 'text.primary', cursor: 'pointer' }}
@@ -119,7 +132,7 @@ function Column({ column }) {
                 <ListItemText>Archive this column</ListItemText>
               </MenuItem>
             </Menu>
-          </Box>
+          </Box> */}
         </Box>
 
         <ListCards cards={orderedCards} />
@@ -132,14 +145,14 @@ function Column({ column }) {
           alignItems: 'center',
           justifyContent: 'space-between'
         }}>
-          {/* <Button startIcon={<AddCardIcon />}>Add new card</Button>
+          <Button startIcon={<AddCardIcon />}>Add new card</Button>
           <Tooltip title="Drap to move">
             <DragHandleIcon sx={{ cursor: 'pointer' }} />
-          </Tooltip> */}
+          </Tooltip>
         </Box>
       </Box>
     </div>
-    
+
   )
 }
 

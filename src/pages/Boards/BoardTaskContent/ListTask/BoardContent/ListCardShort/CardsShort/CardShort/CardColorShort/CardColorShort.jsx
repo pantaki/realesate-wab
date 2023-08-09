@@ -1,7 +1,6 @@
 import Box from '@mui/material/Box'
 
 function CardColorShort({ cardColor }) {
-  console.log('cardColor: ', cardColor)
   const TaskColor = (theme) => {
     if(cardColor.status === 'task_done') return theme.taskColor.task_done
     if(cardColor.status === 'task_note') return theme.taskColor.task_note

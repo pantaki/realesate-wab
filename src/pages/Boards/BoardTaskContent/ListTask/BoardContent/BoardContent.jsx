@@ -145,6 +145,7 @@ function BoardContent({ board }) {
 
     // keo card sang 2 column khac nhau thi xu ly
     if (activeColumn._id !== overColumn._id) {
+
       moveCardBetweenDifferentColumns(
         overColumn,
         overCardId,
@@ -273,13 +274,13 @@ function BoardContent({ board }) {
         display: 'flex',
         p: '10px 0'
       }}>
+
         <ListColumns columns={orderedColumns} />
         <DragOverlay dropAnimation={customDropAnimation}>
           {!activeDragItemType && null}
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
         </DragOverlay>
-
       </Box>
     </DndContext>
   )
