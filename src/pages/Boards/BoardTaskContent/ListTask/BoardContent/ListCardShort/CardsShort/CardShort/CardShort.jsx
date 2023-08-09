@@ -2,7 +2,6 @@ import Box from '@mui/material/Box'
 import CardColorShort from './CardColorShort/CardColorShort'
 
 function CardShort({ column }) {
-  console.log('CardShort column: ', column)
   return (
     <Box sx={{
       // p: '10px 0',

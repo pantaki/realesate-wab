@@ -7,6 +7,7 @@ import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
 
 import { useSortable } from '@dnd-kit/sortable'
@@ -31,7 +32,12 @@ function CardTask({ card }) {
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
-
+  const TaskColor = (theme) => {
+    if (card.status === 'task_done') return theme.taskColor.task_done
+    if (card.status === 'task_note') return theme.taskColor.task_note
+    if (card.status === 'task_waiting') return theme.taskColor.task_waiting
+    if (card.status === 'task_grey') return theme.taskColor.task_grey
+  }
   return (
     <Card
       ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
@@ -41,12 +47,19 @@ function CardTask({ card }) {
         overflow: 'unset',
         maxWidth: '300px'
       }}>
+      <Box sx={{
+        display: 'flex',
+        backgroundColor: TaskColor,
+        // width: '15px',
+        height: '3px',
+        px: 1
+      }} ></Box>
       {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
 
       <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
         <Typography>{card?.title}</Typography>
       </CardContent>
-      {shouldShowCardActions() && 
+      {shouldShowCardActions() &&
         <CardActions sx={{ p: '0 4px 8px 4px' }}>
           {!!card?.memberIds?.length &&
             <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
