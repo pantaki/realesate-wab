@@ -3,6 +3,22 @@ import Column from './Column/Column'
 import Button from '@mui/material/Button'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
+import Card  from '@mui/material/Card'
+import CardActions from '@mui/material/CardActions'
+import CardContent from '@mui/material/CardContent'
+import Typography from '@mui/material/Typography'
+
+import {
+  DndContext,
+  PointerSensor,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+  DragOverlay,
+  defaultDropAnimationSideEffects,
+  closestCorners
+} from '@dnd-kit/core'
 
 function ListColumns({ columns }) {
 // https://docs.dndkit.com/presets/sortable/sortable-context
@@ -18,9 +34,7 @@ function ListColumns({ columns }) {
         overflowY: 'hidden',
         '&::-webkit-scrollbar-track': { m: 2 }
       }}>
-
         {columns?.map(column => (<Column key={column._id} column={column} />))}
-
         {/* Box Add new column */}
         {/* <Box sx={{
           minWidth: '200px',

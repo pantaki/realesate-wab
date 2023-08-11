@@ -4,6 +4,7 @@ import { mapOrder } from '~/utils/sorts'
 
 import Column from './ListColumns/Column/Column'
 import CardTask from './ListColumns/Column/ListCards/Card/CardTask'
+import BoardBottom from './BoardBottom'
 
 import {
   DndContext,
@@ -38,6 +39,7 @@ function BoardContent({ board }) {
   const mySensors = useSensors(mouseSensor, touchSensor)
 
   const [orderedColumns, setOrderedColumns] = useState([])
+  const [orderedCards, setOrderedCards] = useState([])
 
   // cung 1 thoi diem chi co 1 phan tu dang dc keo (column or card)
   const [activeDragItemId, setActiveDragItemId] = useState(null)
@@ -48,10 +50,17 @@ function BoardContent({ board }) {
   useEffect(() => {
     setOrderedColumns(mapOrder(board?.columns, board?.columnOrderIds, '_id'))
   }, [board])
+  // useEffect(() => {
+  //   setOrderedCards(mapOrder(board?.columns?.cards, board?.columns?.cardOrderIds, '_id'))
+  // }, [board?.columns])
 
   // tim 1 cai column theo cardId
   const findColumnByCardId = (cardId) => {
     return orderedColumns.find(column => column?.cards?.map(card => card._id)?.includes(cardId))
+  }
+
+  const findCardByChildrenId = (childrenId) => {
+    return orderedCards.find(cards => cards?.childrens?.map(children => children._id)?.includes(childrenId))
   }
 
   // Function chung xu ly viec cap nhat lai state trong truong hop di chuyen card giua cac column khac nhau
@@ -110,7 +119,7 @@ function BoardContent({ board }) {
   }
 
   const handleDragStart = (event) => {
-    // console.log( 'handlDragStart: ', event)
+    console.log( 'handlDragStart: ', event)
     setActiveDragItemId(event?.active?.id)
     setActiveDragItemType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
     setActiveDragItemTypeData(event?.active?.data?.current)
@@ -179,9 +188,19 @@ function BoardContent({ board }) {
       const activeColumn = findColumnByCardId(activeDraggingCardId)
       const overColumn = findColumnByCardId(overCardId)
 
-      if (!activeColumn || !overColumn) return
+      const activeCard = findCardByChildrenId(active.id)
+      const overCard = findCardByChildrenId(over.id)
 
+
+      console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
+      console.log('xu ly keo tha card end active: ', active.id)
+      console.log('xu ly keo tha card end over: ', over)
+      console.log('xu ly keo tha card end activeCard: ', activeCard)
+      console.log('xu ly keo tha card end overCard: ', overCard)
+
+      if (!activeColumn || !overColumn) return
       if (oldColumnWhenDraggingCard._id !== overColumn._id) {
+        console.log('hanh dong keo tha card giua 2 column khac nhau')
         // hanh dong keo tha card giua 2 column khac nhau
         moveCardBetweenDifferentColumns(
           overColumn,
@@ -192,8 +211,8 @@ function BoardContent({ board }) {
           activeDraggingCardId,
           activeDraggingCardData
         )
-
       } else {
+        console.log('hanh dong keo tha card trong cung 1 column')
 
         // hanh dong keo tha card trong cung 1 column
 
@@ -282,6 +301,7 @@ function BoardContent({ board }) {
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
         </DragOverlay>
       </Box>
+      {/* <BoardBottom columns={orderedColumns} /> */}
     </DndContext>
   )
 }

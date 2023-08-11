@@ -1,4 +1,4 @@
-import Card  from '@mui/material/Card'
+import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -9,7 +9,8 @@ import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import DragIndicatorIcon from '@mui/icons-material/DragIndicator'
-
+import CardChildrens from './CardChildrens/CardChildrens'
+import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
@@ -32,6 +33,9 @@ function CardTask({ card }) {
   const shouldShowCardActions = () => {
     return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
   }
+
+  const orderedChildrens = mapOrder(card?.childrens, card?.cardChildrenOrderIds, '_id')
+
   const TaskColor = (theme) => {
     if (card.status === 'task_done') return theme.taskColor.task_done
     if (card.status === 'task_note') return theme.taskColor.task_note
@@ -39,41 +43,48 @@ function CardTask({ card }) {
     if (card.status === 'task_grey') return theme.taskColor.task_grey
   }
   return (
-    <Card
-      ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
-      sx={{
-        cursor: 'pointer',
-        boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
-        overflow: 'unset',
-        maxWidth: '300px'
-      }}>
+    <Box>
+      <Card
+        ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
+        sx={{
+          cursor: 'pointer',
+          boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
+          overflow: 'unset',
+          maxWidth: '300px'
+        }}>
+        <Box sx={{
+          display: 'flex',
+          backgroundColor: TaskColor,
+          // width: '15px',
+          height: '3px',
+          px: 1
+        }} ></Box>
+        {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
+
+        <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
+          <Typography>{card?.title}</Typography>
+        </CardContent>
+        {shouldShowCardActions() &&
+          <CardActions sx={{ p: '0 4px 8px 4px' }}>
+            {!!card?.memberIds?.length &&
+              <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
+            }
+            {!!card?.comments?.length &&
+              <Button size="small" startIcon={<CommentIcon />}>{card?.comments?.length}</Button>
+            }
+            {!!card?.attachments?.length &&
+              <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
+            }
+          </CardActions>
+        }
+      </Card>
       <Box sx={{
-        display: 'flex',
-        backgroundColor: TaskColor,
-        // width: '15px',
-        height: '3px',
-        px: 1
-      }} ></Box>
-      {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
+        pt: '10px'
+      }}>
+        <CardChildrens ChildrentCards={orderedChildrens} />
+      </Box>
+    </Box>
 
-      <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-        <Typography>{card?.title}</Typography>
-      </CardContent>
-      {shouldShowCardActions() &&
-        <CardActions sx={{ p: '0 4px 8px 4px' }}>
-          {!!card?.memberIds?.length &&
-            <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
-          }
-          {!!card?.comments?.length &&
-            <Button size="small" startIcon={<CommentIcon />}>{card?.comments?.length}</Button>
-          }
-          {!!card?.attachments?.length &&
-            <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
-          }
-        </CardActions>
-      }
-
-    </Card>
   )
 }
 

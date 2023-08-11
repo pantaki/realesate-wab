@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Box from '@mui/material/Box'
 import BoardContent from './BoardContent'
 import Typography from '@mui/material/Typography'
 import { styled } from '@mui/material/styles'
 import Paper from '@mui/material/Paper'
 import ListCardShort from './ListCardShort/ListCardShort'
+import { useMediaQuery } from 'react-responsive'
 
 const Item = styled(Paper)(({ theme }) => ({
   bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
@@ -21,6 +22,24 @@ function BoardContentShort({ board }) {
   const handleTitle = (board, boardId) => {
     SetBoardConver({ ...board, span: board?.span === 4 ? 12 : 4, display: board?.span === 4 ? 'block' : 'none' })
   }
+
+  const isBigScreen = useMediaQuery({ query: '(min-width: 1824px)' })
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 1224px)' })
+  // const isPortrait = useMediaQuery({ query: '(orientation: portrait)' })
+  // const isRetina = useMediaQuery({ query: '(min-resolution: 2dppx)' })
+
+ 
+  // console.log('isPortrait: ', isPortrait)
+  // console.log('isRetina: ', isRetina)
+
+  const handleSpan = (boardConver) => {
+    if ( boardConver?.span === 4 ) return 'span 4'
+    if ( boardConver?.span === 6 ) return 'span 6'
+    if ( boardConver?.span === 8 ) return 'span 8'
+    if ( boardConver?.span === 12 ) return 'span 12'
+    return 'span 12'
+  }
+
   if (boardConver.span === 4) {
     return (
       <Box gridColumn={boardConver.span === 4 ? 'span 4' : 'span 12'} display={boardConver.display === 'none' ? 'block' : 'none'}
@@ -82,7 +101,7 @@ function BoardContentShort({ board }) {
         transition: '0.7s'
       }}
     >
-      <Item sx={{transition: '0.7s'}}>
+      <Item sx={{ transition: '0.7s' }}>
         <Box onClick={() => handleTitle(boardConver, boardConver?._id)} sx={{
           bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#1762ad'),
           display: 'flex',
@@ -118,7 +137,6 @@ function BoardContentShort({ board }) {
         </Box>
         <BoardContent key={boardConver._id} board={boardConver} />
       </Item>
-      
     </Box>
   )
 }

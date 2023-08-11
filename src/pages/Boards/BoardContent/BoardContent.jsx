@@ -231,7 +231,7 @@ function BoardContent({ board }) {
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
 
       if (active.id !== over.id) {
-        console.log('column drap')
+
         // get position old
         const oldColumnIndex = orderedColumns.findIndex(c => c._id === active.id)
         // get position new
@@ -318,7 +318,6 @@ function BoardContent({ board }) {
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
         </DragOverlay>
-
       </Box>
     </DndContext>
   )
