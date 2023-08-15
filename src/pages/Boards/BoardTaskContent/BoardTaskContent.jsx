@@ -5,7 +5,7 @@ function BoardTaskContent({ boards }) {
 
   return (
     <Box sx={{
-      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
       width: '100%',
       height: (theme) => theme.trello.boardContentHeight,
       // display: 'flex',

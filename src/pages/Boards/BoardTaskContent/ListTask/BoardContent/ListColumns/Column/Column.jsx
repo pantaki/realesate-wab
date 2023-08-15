@@ -61,21 +61,35 @@ function Column({ column }) {
         }}>
         {/* Box column Header */}
         <Box sx={{
-          backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#cecfd1'),
-          // m: '10px 10%',
-          p: '15px 10px'
-        }}>
-          <Box sx={{
-            p: '10px 0'
-          }}>{column.title}</Box>
-          <ListCardsHeader cards={orderedCards} />
-        </Box>
-        <Box sx={{
-          height: (theme) => theme.trello.columnHeaderHeight,
-          p: 4,
+          // width: '244px',
+          m: '25px 0',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
+        }}>
+          <Box sx={{
+            width: '180px',
+            height: '120px',
+            pb: '10px',
+            borderRadius: '8px',
+            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#dbdbdb')
+            // m: '10px 10%',
+            // p: '15px 10px'
+          }}>
+            <Box sx={{
+              p: '10px 0'
+            }}>{column.title}</Box>
+            <ListCardsHeader cards={orderedCards} />
+          </Box>
+        </Box>
+
+        <Box sx={{
+          height: (theme) => theme.trello.columnHeaderHeight,
+          mb: '30px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: '2px solid #ddd'
         }}>
           <Typography variant="h6" sx={{
             fontSize: '21px',

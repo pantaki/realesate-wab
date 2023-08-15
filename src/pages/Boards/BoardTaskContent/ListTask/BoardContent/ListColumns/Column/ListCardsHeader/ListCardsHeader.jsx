@@ -8,7 +8,7 @@ function ListCardsHeader({ cards }) {
       display: 'grid',
       gridTemplateColumns: 'repeat(5, 0fr)',
       gridGap: 5,
-      minHeight: '90px',
+      // minHeight: '90px',
       justifyContent: 'center',
       alignItems: 'baseline'
     }}>

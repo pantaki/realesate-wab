@@ -8,7 +8,7 @@ import ListCardShort from './ListCardShort/ListCardShort'
 import { useMediaQuery } from 'react-responsive'
 
 const Item = styled(Paper)(({ theme }) => ({
-  bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+  bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
   // ...theme.typography.body2,
   padding: 1,
   textAlign: 'center'
@@ -44,7 +44,7 @@ function BoardContentShort({ board }) {
     return (
       <Box gridColumn={boardConver.span === 4 ? 'span 4' : 'span 12'} display={boardConver.display === 'none' ? 'block' : 'none'}
         sx={{
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
           width: '100%',
           p: '10px 0',
           transition: '0.7s',
@@ -53,7 +53,7 @@ function BoardContentShort({ board }) {
       >
         <Item>
           <Box onClick={() => handleTitle(boardConver, boardConver?._id)} sx={{
-            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#1762ad'),
+            bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#bbbbbb'),
             display: 'flex',
             pl: 2,
             justifyContent: 'space-between',
@@ -61,6 +61,7 @@ function BoardContentShort({ board }) {
             borderTopLeftRadius: '5px',
             borderTopRightRadius: '5px',
             width: '100%',
+            alignItems: 'center',
             transition: '0.7s',
             '&:hover': {
               cursor: 'pointer',
@@ -71,16 +72,18 @@ function BoardContentShort({ board }) {
               fontSize: '14px',
               fontWeight: '500',
               cursor: 'pointer',
-              p: '10px 0'
+              p: '10px 0',
+              color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : '#000')
             }}>
               {boardConver?.title}
             </Typography>
             <Typography variant="span" sx={{
-              fontSize: '1rem',
+              fontSize: '20px',
               fontWeight: 'bold',
               cursor: 'pointer',
               p: '10px 20px',
-              backgroundColor: '#054789'
+              borderTopRightRadius: '5px',
+              backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#054789' : '#6b6b6b')
             }}>
               {boardConver?.titleNumber}
             </Typography>
@@ -94,16 +97,16 @@ function BoardContentShort({ board }) {
   return (
     <Box gridColumn={boardConver.span === 4 ? 'span 4' : 'span 12'} display={boardConver.display === 'none' ? 'none' : 'block'}
       sx={{
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
         width: '100%',
-        p: '10px 0',
+        // p: '10px 0',
         px: 3,
         transition: '0.7s'
       }}
     >
       <Item sx={{ transition: '0.7s' }}>
         <Box onClick={() => handleTitle(boardConver, boardConver?._id)} sx={{
-          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#1762ad'),
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#486889' : '#c7c7c7'),
           display: 'flex',
           pl: 2,
           justifyContent: 'space-between',
@@ -111,6 +114,7 @@ function BoardContentShort({ board }) {
           borderTopLeftRadius: '5px',
           borderTopRightRadius: '5px',
           width: '100%',
+          alignItems: 'center',
           transition: '0.5s',
           '&:hover': {
             cursor: 'pointer',
@@ -118,19 +122,25 @@ function BoardContentShort({ board }) {
           }
         }}>
           <Typography variant="h6" sx={{
-            fontSize: '1rem',
+            fontSize: '20px',
             fontWeight: 'bold',
             cursor: 'pointer',
-            p: '10px 0'
+            // p: '10px 0',
+            color: (theme) => (theme.palette.mode === 'dark' ? '#fff' : '#000')
           }}>
             {boardConver?.title}
           </Typography>
           <Typography variant="span" sx={{
-            fontSize: '15px',
+            width: '52px',
+            height: '52px',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '23px',
             fontWeight: 'bold',
             cursor: 'pointer',
             p: '10px 20px',
-            backgroundColor: '#0c4176'
+            borderTopRightRadius: '5px',
+            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#054789' : '#6b6b6b')
           }}>
             {boardConver?.titleNumber}
           </Typography>

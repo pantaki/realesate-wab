@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -14,7 +15,17 @@ import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 
+import Modal from '@mui/material/Modal'
+
 function CardTask({ card }) {
+  const [open, setOpen] = useState(false)
+
+  const handleOpen = () => {
+    setOpen(true);
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: card._id,
@@ -31,7 +42,7 @@ function CardTask({ card }) {
   }
 
   const shouldShowCardActions = () => {
-    return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
+    return (!!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length) && card.status === 'task_note'
   }
 
   const orderedChildrens = mapOrder(card?.childrens, card?.cardChildrenOrderIds, '_id')
@@ -59,7 +70,7 @@ function CardTask({ card }) {
           height: '3px',
           px: 1
         }} ></Box>
-        {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />}
+        {/* {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />} */}
 
         <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
           <Typography>{card?.title}</Typography>
@@ -70,13 +81,36 @@ function CardTask({ card }) {
               <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
             }
             {!!card?.comments?.length &&
-              <Button size="small" startIcon={<CommentIcon />}>{card?.comments?.length}</Button>
+              <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{card?.comments?.length}</Button>
             }
             {!!card?.attachments?.length &&
               <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
             }
           </CardActions>
         }
+        <Box>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="child-modal-title"
+            aria-describedby="child-modal-description"
+          >
+            <Box sx={{
+              width: 200,
+              m: '30px auto',
+              backgroundColor: '#ababab',
+              p: '20px',
+              borderRadius: '10px'
+            }}>
+              <h2 id="child-modal-title">User1:</h2>
+              <p id="child-modal-description">
+                {card?.comments}
+              </p>
+              <Button onClick={handleClose}>Close</Button>
+            </Box>
+          </Modal>
+        </Box>
+        
       </Card>
       <Box sx={{
         pt: '10px'

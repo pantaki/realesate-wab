@@ -154,7 +154,6 @@ function BoardContent({ board }) {
 
     // keo card sang 2 column khac nhau thi xu ly
     if (activeColumn._id !== overColumn._id) {
-
       moveCardBetweenDifferentColumns(
         overColumn,
         overCardId,
@@ -287,11 +286,11 @@ function BoardContent({ board }) {
       onDragEnd={handleDragEnd}
     >
       <Box sx={{
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
         width: '100%',
         height: (theme) => theme.trello.boardContentHeight,
         display: 'flex',
-        p: '10px 0'
+        // p: '10px 0'
       }}>
 
         <ListColumns columns={orderedColumns} />
