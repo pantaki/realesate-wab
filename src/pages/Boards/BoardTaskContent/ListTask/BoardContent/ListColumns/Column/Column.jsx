@@ -69,7 +69,7 @@ function Column({ column }) {
         }}>
           <Box sx={{
             width: '180px',
-            height: '120px',
+            minHeight: '120px',
             pb: '10px',
             borderRadius: '8px',
             backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#dbdbdb')

@@ -11,7 +11,7 @@ function Board() {
       <AppBar />
       <BoardBar board={mockData?.board} />
       {/* <BoardContent board={mockData?.board} /> */}
-      <BoardTaskContent boards={mockData?.boards} />
+      <BoardTaskContent boards={mockData?.tasks} />
     </Container>
   )
 }
