@@ -4,6 +4,7 @@ import { teal, deepOrange, cyan, orange } from '@mui/material/colors'
 const APP_BAR_HEIGHT = '58px'
 const BOAR_BAR_HEIGHT = '60px'
 const BOAR_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOAR_BAR_HEIGHT})`
+const BOAR_CONTENT_HEIGHT_HEADER = `calc(50vh - ${APP_BAR_HEIGHT} - ${BOAR_BAR_HEIGHT})`
 const COLUMN_HEADER_HEIGHT = '50px'
 const COLUMN_FOOTER_HEIGHT = '56px'
 
@@ -12,6 +13,7 @@ const theme = extendTheme({
     appBarHeight: APP_BAR_HEIGHT,
     boardBarHeight: BOAR_BAR_HEIGHT,
     boardContentHeight: BOAR_CONTENT_HEIGHT,
+    boardContentHeightHeader: BOAR_CONTENT_HEIGHT_HEADER,
     columnHeaderHeight: COLUMN_HEADER_HEIGHT,
     columnFooterHeight: COLUMN_FOOTER_HEIGHT
   },

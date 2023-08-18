@@ -5,7 +5,7 @@ import { styled } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper'
 
-function ListTask({ tasks }) {
+function ListTask({ tasks, users, documents }) {
 
   return (
     <Box sx={{
@@ -26,7 +26,7 @@ function ListTask({ tasks }) {
         }}>
         {/* {tasks?.map(board => (<BoardContent key={board._id} board={board} Item={Item} />))} */}
         {/* <BoardContentShort key={tasks[0]._id} board={tasks[0]} /> */}
-        {tasks?.map(board => (<BoardContentShort key={board._id} board={board} />))}
+        {tasks?.map(board => (<BoardContentShort key={board._id} board={board} users={users} documents={documents} />))}
       </Box>
     </Box>
   )

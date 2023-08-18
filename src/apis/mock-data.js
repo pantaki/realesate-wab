@@ -1103,51 +1103,67 @@ export const mockData = {
     ]
   }
   ],
-  user: [
+  users: [
     {
       _id: 'user-id-01',
-      name: 'user 1',
-      role: 'admin'
+      name: 'John Doe',
+      email: 'johndoe@gmail.com',
+      phone: '313-313-3130',
+      role: 'admin',
+      role_key: 'admin',
+      type: 'B1',
+      status: 'yes'
     },
     {
-      _id: 'user-id-02',
-      name: 'user 2',
-      role: 'admin'
+      id: 'user-id-02',
+      name: 'Jane Doe',
+      email: 'janedoe@gmail.com',
+      phone: '313-313-3130',
+      role: 'Buyer 2',
+      role_key: 'buyer_2',
+      type: 'B2',
+      status: 'yes'
     },
     {
       _id: 'user-id-03',
-      name: 'user 3',
-      role: 'admin'
+      name: 'Jim Schotts',
+      email: "jimschotts@gmail.com",
+      phone: "313-313-3133",
+      role: "Inspector",
+      role_key: "inspector",
+      type: "B1",
+      status: "no",
     },
     {
       _id: 'user-id-04',
-      name: 'user 4',
-      role: 'admin'
+      name: "Grand Lyons",
+      email: "grandlyons@gmail.com",
+      phone: "313-313-3134",
+      role: "Leader",
+      role_key: "leader",
+      type: "F1",
+      status: "no",
     },
     {
       _id: 'user-id-05',
-      name: 'user 5',
-      role: 'admin'
+      name: "Team Lyons",
+      email: "teamlyons@gmail.com",
+      phone: "313-313-3135",
+      role: "Leader Team",
+      role_key: "leader_team",
+      type: "F2",
+      status: "no",
     },
     {
       _id: 'user-id-06',
-      name: 'user 6',
-      role: 'admin'
-    },
-    {
-      _id: 'user-id-07',
-      name: 'user 7',
-      role: 'admin'
-    },
-    {
-      _id: 'user-id-08',
-      name: 'user 8',
-      role: 'admin'
-    },
-    {
-      _id: 'user-id-09',
-      name: 'user 9',
-      role: 'admin'
-    },
-  ]
+      name: "Team Lyons",
+      email: "teamlyons@gmail.com",
+      phone: "313-313-3135",
+      role: "Leader Team",
+      role_key: "leader_team",
+      type: "F2",
+      status: "yes",
+    }
+  ],
+  documents: ['test', 'test2']
 }

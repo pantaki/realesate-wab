@@ -4,7 +4,8 @@ import { mapOrder } from '~/utils/sorts'
 
 import Column from './ListColumns/Column/Column'
 import CardTask from './ListColumns/Column/ListCards/Card/CardTask'
-import BoardBottom from './BoardBottom'
+import BoardContentTop from './BoardContentTop'
+import BoardContentBottom from './BoardContentBottom'
 
 import {
   DndContext,
@@ -26,7 +27,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board }) {
+function BoardContent({ board, users, documents }) {
 
   // mouse move 10px then active event
   const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
@@ -285,22 +286,31 @@ function BoardContent({ board }) {
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
-      <Box sx={{
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
-        width: '100%',
-        height: (theme) => theme.trello.boardContentHeight,
-        display: 'flex',
-        // p: '10px 0'
-      }}>
-
-        <ListColumns columns={orderedColumns} />
-        <DragOverlay dropAnimation={customDropAnimation}>
-          {!activeDragItemType && null}
-          {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}
-          {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
-        </DragOverlay>
+      <Box>
+        <BoardContentTop users={users} />
+        <Box sx={{
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
+          width: '100%',
+          height: (theme) => theme.trello.boardContentHeight,
+          
+          // p: '10px 0'
+        }}>
+          <Box sx={{
+            display: 'flex'
+          }}>
+            <ListColumns columns={orderedColumns} />
+            <DragOverlay dropAnimation={customDropAnimation}>
+              {!activeDragItemType && null}
+              {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}
+              {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
+            </DragOverlay>
+          </Box>
+          
+          <BoardContentBottom documents={documents} />
+        </Box>
+        
       </Box>
-      {/* <BoardBottom columns={orderedColumns} /> */}
+
     </DndContext>
   )
 }

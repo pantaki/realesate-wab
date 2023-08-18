@@ -17,8 +17,10 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.11.16",
     "@mui/material": "^5.13.0",
+    "@tdaniil/react-draggable": "^5.0.1",
     "lodash": "^4.17.21",
     "react": "^18.2.0",
+    "react-animate-height": "^3.2.2",
     "react-collapsed": "^4.0.4",
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.2"

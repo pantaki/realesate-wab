@@ -15,7 +15,7 @@ const Item = styled(Paper)(({ theme }) => ({
   // color: theme.palette.text.secondary,
 }))
 
-function BoardContentShort({ board }) {
+function BoardContentShort({ board, users, documents }) {
 
   const [boardConver, SetBoardConver] = useState(board)
 
@@ -145,7 +145,7 @@ function BoardContentShort({ board }) {
             {boardConver?.titleNumber}
           </Typography>
         </Box>
-        <BoardContent key={boardConver._id} board={boardConver} />
+        <BoardContent key={boardConver._id} board={boardConver} users={users} documents={documents} />
       </Item>
     </Box>
   )
