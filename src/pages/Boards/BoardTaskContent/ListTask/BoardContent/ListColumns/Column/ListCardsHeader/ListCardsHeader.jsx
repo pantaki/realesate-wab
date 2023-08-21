@@ -6,7 +6,7 @@ function ListCardsHeader({ cards }) {
   return (
     <Box sx={{
       display: 'grid',
-      gridTemplateColumns: 'repeat(5, 0fr)',
+      gridTemplateColumns: 'repeat(7, 0fr)',
       gridGap: 5,
       // minHeight: '90px',
       justifyContent: 'center',

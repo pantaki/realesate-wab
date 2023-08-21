@@ -68,9 +68,9 @@ function Column({ column }) {
           justifyContent: 'center'
         }}>
           <Box sx={{
-            width: '180px',
-            minHeight: '120px',
-            pb: '10px',
+            // width: '180px',
+            minHeight: '140px',
+            p: 2,
             borderRadius: '8px',
             backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#dbdbdb')
             // m: '10px 10%',
