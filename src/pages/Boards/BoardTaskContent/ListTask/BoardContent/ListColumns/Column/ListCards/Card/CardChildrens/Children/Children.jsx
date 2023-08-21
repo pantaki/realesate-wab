@@ -48,33 +48,40 @@ function Children({ ChildrentCard }) {
         overflow: 'unset',
         maxWidth: '300px',
         // backgroundColor: TaskColor,
-        opacity: '0.7'
+        opacity: '0.7',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around'
       }}>
       <Box sx={{
-        display: 'flex',
+        // display: 'flex',
         backgroundColor: TaskColor,
         // width: '15px',
-        height: '3px',
-        px: 1
+        // width: '30px',
+        // height: '30px',
+        mx: 1,
+        p: 2
       }} ></Box>
-      {ChildrentCard?.cover && <CardMedia sx={{ height: 140 }} image={ChildrentCard?.cover} />}
-
-      <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-        <Typography>{ChildrentCard?.title}</Typography>
-      </CardContent>
-      {shouldShowCardActions() &&
-        <CardActions sx={{ p: '0 4px 8px 4px' }}>
-          {!!ChildrentCard?.memberIds?.length &&
-            <Button size="small" startIcon={<GroupIcon />}>{ChildrentCard?.memberIds?.length}</Button>
-          }
-          {!!ChildrentCard?.comments?.length &&
-            <Button size="small" startIcon={<CommentIcon />}>{ChildrentCard?.comments?.length}</Button>
-          }
-          {!!ChildrentCard?.attachments?.length &&
-            <Button size="small" startIcon={<AttachmentIcon />}>{ChildrentCard?.attachments?.length}</Button>
-          }
-        </CardActions>
-      }
+      <Box>
+        {ChildrentCard?.cover && <CardMedia sx={{ height: 140 }} image={ChildrentCard?.cover} />}
+        <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
+          <Typography>{ChildrentCard?.title}</Typography>
+        </CardContent>
+        {shouldShowCardActions() &&
+          <CardActions sx={{ p: '0 4px 8px 4px' }}>
+            {!!ChildrentCard?.memberIds?.length &&
+              <Button size="small" startIcon={<GroupIcon />}>{ChildrentCard?.memberIds?.length}</Button>
+            }
+            {!!ChildrentCard?.comments?.length &&
+              <Button size="small" startIcon={<CommentIcon />}>{ChildrentCard?.comments?.length}</Button>
+            }
+            {!!ChildrentCard?.attachments?.length &&
+              <Button size="small" startIcon={<AttachmentIcon />}>{ChildrentCard?.attachments?.length}</Button>
+            }
+          </CardActions>
+        }
+      </Box>
+      
     </Card>
 
   )

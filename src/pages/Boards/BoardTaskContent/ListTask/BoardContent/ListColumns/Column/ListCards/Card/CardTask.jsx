@@ -61,56 +61,62 @@ function CardTask({ card }) {
           cursor: 'pointer',
           boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
           overflow: 'unset',
-          maxWidth: '300px'
+          maxWidth: '300px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-around'
         }}>
         <Box sx={{
-          display: 'flex',
+          // display: 'flex',
           backgroundColor: TaskColor,
-          // width: '15px',
-          height: '3px',
-          px: 1
+          // width: '30px',
+          // height: '30px',
+          mx: 1,
+          p: 2
         }} ></Box>
         {/* {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />} */}
 
-        <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-          <Typography sx={{
-            fontSize: '13px'
-          }}>{card?.title}</Typography>
-        </CardContent>
-        {shouldShowCardActions() &&
-          <CardActions sx={{ p: '0 4px 8px 4px' }}>
-            {!!card?.memberIds?.length &&
-              <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
-            }
-            {!!card?.comments?.length &&
-              <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{card?.comments?.length}</Button>
-            }
-            {!!card?.attachments?.length &&
-              <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
-            }
-          </CardActions>
-        }
         <Box>
-          <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="child-modal-title"
-            aria-describedby="child-modal-description"
-          >
-            <Box sx={{
-              width: 200,
-              m: '30px auto',
-              backgroundColor: '#ababab',
-              p: '20px',
-              borderRadius: '10px'
-            }}>
-              <h2 id="child-modal-title">User1:</h2>
-              <p id="child-modal-description">
-                {card?.comments}
-              </p>
-              <Button onClick={handleClose}>Close</Button>
-            </Box>
-          </Modal>
+          <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
+            <Typography sx={{
+              fontSize: '13px'
+            }}>{card?.title}</Typography>
+          </CardContent>
+          {shouldShowCardActions() &&
+            <CardActions sx={{ p: '0 4px 8px 4px' }}>
+              {!!card?.memberIds?.length &&
+                <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
+              }
+              {!!card?.comments?.length &&
+                <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{card?.comments?.length}</Button>
+              }
+              {!!card?.attachments?.length &&
+                <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
+              }
+            </CardActions>
+          }
+          <Box>
+            <Modal
+              open={open}
+              onClose={handleClose}
+              aria-labelledby="child-modal-title"
+              aria-describedby="child-modal-description"
+            >
+              <Box sx={{
+                width: 200,
+                m: '30px auto',
+                backgroundColor: '#ababab',
+                p: '20px',
+                borderRadius: '10px'
+              }}>
+                <h2 id="child-modal-title">User1:</h2>
+                <p id="child-modal-description">
+                  {card?.comments}
+                </p>
+                <Button onClick={handleClose}>Close</Button>
+              </Box>
+            </Modal>
+          </Box>
         </Box>
 
       </Card>
