@@ -52,7 +52,7 @@ function Children({ ChildrentCard }) {
       }}>
       <Box sx={{
         display: 'flex',
-        // backgroundColor: TaskColor,
+        backgroundColor: TaskColor,
         // width: '15px',
         height: '3px',
         px: 1
