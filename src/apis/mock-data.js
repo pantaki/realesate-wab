@@ -1149,7 +1149,7 @@ export const mockData = {
       name: "Team Lyons",
       email: "teamlyons@gmail.com",
       phone: "313-313-3135",
-      role: "Leader Team",
+      role: "Leader",
       role_key: "leader_team",
       type: "F2",
       status: "no",
@@ -1159,11 +1159,166 @@ export const mockData = {
       name: "Team Lyons",
       email: "teamlyons@gmail.com",
       phone: "313-313-3135",
-      role: "Leader Team",
+      role: "Leader",
       role_key: "leader_team",
       type: "F2",
       status: "yes",
     }
   ],
-  documents: ['test', 'test2']
+  usersCheck: ['user-id-01', 'user-id-02', 'user-id-03'],
+  documents: [
+    {
+      title: 'KW OFFICE POLICY',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {  
+      title: 'bba',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', 's'],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', 's'],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'pa',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', 's'],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', 's'],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'em receipt',
+      b1: ['documents-row-data', ''],
+      b2: ['documents-row-data', ''],
+      la: ['documents-row-data', 's'],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', 's'],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'sd',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', 's'],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'tax sheet',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', 's'],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'blc sheet',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'pre-approval',
+      b1: ['documents-row-data', ''],
+      b2: ['documents-row-data', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'bir',
+      b1: ['documents-row-data green', ''],
+      b2: ['documents-row-data green', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'sir',
+      b1: ['documents-row-data yellow', ''],
+      b2: ['documents-row-data yellow', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', 's'],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'amend#1',
+      b1: ['documents-row-data green', 's'],
+      b2: ['documents-row-data green', 's'],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'title commit',
+      b1: ['documents-row-data', 's'],
+      b2: ['documents-row-data', 's'],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'altass',
+      b1: ['documents-row-data', 's'],
+      b2: ['documents-row-data', 's'],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    },
+    {
+      title: 'closing confirm',
+      b1: ['documents-row-data', ''],
+      b2: ['documents-row-data', ''],
+      la: ['documents-row-data', ''],
+      f1: ['documents-row-data', ''],
+      f2: ['documents-row-data', ''],
+      ti: ['documents-row-data', ''],
+      kw: ['documents-row-data', ''],
+      tg: ['documents-row-data', '']
+    }]
 }

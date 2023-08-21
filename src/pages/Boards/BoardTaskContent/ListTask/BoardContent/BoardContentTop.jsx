@@ -88,7 +88,7 @@ function BoardContentTop({ users }) {
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                           {user?.type}: {user?.name}
                         </Typography>
- 
+
                         <Typography sx={{ mb: 1.5 }} color="text.secondary">
                           adjective
                         </Typography>
@@ -101,31 +101,36 @@ function BoardContentTop({ users }) {
                           fontSize: '14px',
                           p: '10px 0'
                         }}>
-                          ROLE:
-                          <Select
-                            disabled
-                            labelId="demo-select-small-label"
-                            id="demo-select-small"
-                            value={user?.role_key}
-                            label="Role User"
-                            onChange={handleChange}
-                          >
-                            <MenuItem value={user?.role_key}>{user?.role}</MenuItem>
+                          <Box sx={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'baseline'
+                          }}>
+                            <Typography sx={{ mb: 1.5, ml: 1 }} color="text.secondary">
+                              ROLE:
+                            </Typography>
+                            <Select
+                              small
+                              disabled
+                              labelId="demo-select-small-label"
+                              id="demo-select-small"
+                              value={user?.role_key}
+                              label="Role User"
+                              onChange={handleChange}
+                            >
+                              <MenuItem value={user?.role_key}>{user?.role}</MenuItem>
 
-                          </Select>
+                            </Select>
+                          </Box>
+
                         </Typography>
                       </CardContent>
                     </Card>
-                    
-                    
-                    
                   </Box>
                 )
               }
 
               )}
-
-
               <Item>
                 <Box sx={{
                   display: 'flex',

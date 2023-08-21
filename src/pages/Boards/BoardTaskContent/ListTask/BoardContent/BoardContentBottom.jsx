@@ -86,7 +86,7 @@ function BoardContentBottom({users}) {
             boxShadow: '2px 0px 3px 0px #757575',
             borderBottomRightRadius: '5px',
             borderBottomLeftRadius: '5px',
-            p: {padding},
+            
             transition: '0.5s',
             width: '100%',
             overflowX: 'auto',
@@ -105,7 +105,9 @@ function BoardContentBottom({users}) {
                 backgroundColor: 'inherit'
               }}
             >
-               <Card sx={{ minWidth: 275 }}>
+              <Card
+                sx={{ minWidth: 275 }}
+              >
                 <CardContent>
                   <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                     Documents
