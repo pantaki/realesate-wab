@@ -65,7 +65,10 @@ function Children({ ChildrentCard }) {
       <Box>
         {ChildrentCard?.cover && <CardMedia sx={{ height: 140 }} image={ChildrentCard?.cover} />}
         <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
-          <Typography>{ChildrentCard?.title}</Typography>
+          <Typography sx={{
+            fontSize: '13px',
+            textAlign: 'left'
+          }} >{ChildrentCard?.title}</Typography>
         </CardContent>
         {shouldShowCardActions() &&
           <CardActions sx={{ p: '0 4px 8px 4px' }}>

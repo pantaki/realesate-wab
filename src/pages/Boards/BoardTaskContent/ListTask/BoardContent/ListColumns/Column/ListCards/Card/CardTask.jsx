@@ -79,7 +79,8 @@ function CardTask({ card }) {
         <Box>
           <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
             <Typography sx={{
-              fontSize: '13px'
+              fontSize: '13px',
+              textAlign: 'left'
             }}>{card?.title}</Typography>
           </CardContent>
           {shouldShowCardActions() &&
