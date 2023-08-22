@@ -111,7 +111,7 @@ export const mockData = {
             ],
             status: 'task_note',
             title: 'Title of card 01',
-            description: 'Markdown Syntax (sẽ ở khóa nâng cao nhé)',
+            description: 'Markdown Syntax',
             cover: 'https://media.discordapp.net/attachments/975603557048930364/1136578893759918160/Hinh-nen-2021_61.jpg?width=885&height=531',
             memberIds: ['user-id-01'],
             comments: ['test comment 01', 'test comment 02'],

@@ -164,8 +164,8 @@ function BoardContentTop({ users }) {
           }}
           id="basic-button-contentTop"
           onClick={handleClick}
-          startIcon={<DragIndicatorIcon />}
-          endIcon={<ExpandMoreIcon />}
+          startIcon={<DragIndicatorIcon sx={{ fill: '#919eab' }} />}
+          endIcon={<ExpandMoreIcon sx={{ fill: '#919eab' }} />}
         >
           People
         </Button>

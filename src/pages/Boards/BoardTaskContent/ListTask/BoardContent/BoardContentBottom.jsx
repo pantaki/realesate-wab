@@ -75,8 +75,8 @@ function BoardContentBottom({users}) {
           }}
           id="basic-button-contentTop"
           onClick={handleClick}
-          startIcon={<DragIndicatorIcon />}
-          endIcon={<ExpandLessIcon />}
+          startIcon={<DragIndicatorIcon sx={{ fill: '#919eab' }} />}
+          endIcon={<ExpandLessIcon sx={{ fill: '#919eab' }} />}
         >
           documents
         </Button>
@@ -86,7 +86,6 @@ function BoardContentBottom({users}) {
             boxShadow: '2px 0px 3px 0px #757575',
             borderBottomRightRadius: '5px',
             borderBottomLeftRadius: '5px',
-            
             transition: '0.5s',
             width: '100%',
             overflowX: 'auto',
