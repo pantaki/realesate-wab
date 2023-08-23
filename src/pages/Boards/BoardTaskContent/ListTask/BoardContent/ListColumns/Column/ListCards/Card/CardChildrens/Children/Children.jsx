@@ -51,7 +51,8 @@ function Children({ ChildrentCard }) {
         opacity: '0.7',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-around'
+        justifyContent: 'left',
+        // justifyContent: 'space-around'
       }}>
       <Box sx={{
         // display: 'flex',

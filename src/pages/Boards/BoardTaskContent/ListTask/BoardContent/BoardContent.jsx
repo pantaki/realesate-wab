@@ -292,7 +292,6 @@ function BoardContent({ board, users, documents }) {
           bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#fff'),
           width: '100%',
           height: (theme) => theme.trello.boardContentHeight,
-          
           // p: '10px 0'
         }}>
           <Box sx={{
@@ -305,10 +304,10 @@ function BoardContent({ board, users, documents }) {
               {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
             </DragOverlay>
           </Box>
-          
+
           <BoardContentBottom documents={documents} />
         </Box>
-        
+
       </Box>
 
     </DndContext>

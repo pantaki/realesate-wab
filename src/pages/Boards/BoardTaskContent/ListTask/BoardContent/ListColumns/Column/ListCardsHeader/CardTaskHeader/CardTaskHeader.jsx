@@ -3,9 +3,10 @@ import Box from '@mui/material/Box'
 
 function CardTaskHeader({ card }) {
   const [dataCart, setDataCart] = useState(card)
-  useEffect(() => {
-    console.log('useEffect CardTaskHeader', card.status)
-  }, [card])
+  if(card.status !== dataCart.status) setDataCart(card)
+  // useEffect(() => {
+  //   console.log('useEffect CardTaskHeader', card.status)
+  // }, [card])
   const TaskColor = (theme) => {
     if (dataCart.status === 'task_done') return theme.taskColor.task_done
     if (dataCart.status === 'task_note') return theme.taskColor.task_note

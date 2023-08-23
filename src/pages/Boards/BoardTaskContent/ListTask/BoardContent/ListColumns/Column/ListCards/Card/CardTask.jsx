@@ -20,6 +20,8 @@ import Modal from '@mui/material/Modal'
 import Radio from '@mui/material/Radio'
 import TextField from '@mui/material/TextField'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 
 const style = {
   position: 'absolute',
@@ -51,15 +53,17 @@ function CardTask({ card }) {
   const [selectedValue, setSelectedValue] = useState()
   const [dataCart, setDataCart] = useState(card)
   const [inputEditTask, setInputEditTask] = useState(dataCart?.comments[0])
+  const [chilrenHidden, setChilrenHidden] = useState('block')
+  const [chilrenHiddenIcon, setChilrenHiddenIcon] = useState(<KeyboardArrowDownIcon sx={{ fill: '#919eab' }} />)
 
-  useEffect(() => {
-    console.log('useEffect', card)
-    setDataCart(card)
-    console.log('dataCart ', dataCart)
-  }, [card])
+  // useEffect(() => {
+  //   console.log('useEffect', card)
+  //   setDataCart(card)
+  //   console.log('dataCart ', dataCart)
+  // }, [card])
 
   const handleOpenTask = () => {
-    if (dataCart.status == 'task_waiting') setOpenTask(true)
+    if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') setOpenTask(true)
     setSelectedValue(dataCart.status)
   }
   const handleCloseTask = () => setOpenTask(false)
@@ -108,8 +112,21 @@ function CardTask({ card }) {
     setInputEditTask(dataCart.comments[0])
 
   }
+  
   const handleChange = (event) => {
     setSelectedValue(event.target.value)
+  }
+
+  const handleChilrenHidden = (event) => {
+    
+    if (chilrenHidden === 'block') {
+      setChilrenHidden('none')
+      setChilrenHiddenIcon(<KeyboardArrowRightIcon sx={{ fill: '#919eab' }} />)
+    } 
+    if (chilrenHidden === 'none') {
+      setChilrenHidden('block')
+      setChilrenHiddenIcon(<KeyboardArrowDownIcon sx={{ fill: '#919eab' }} />)
+    } 
   }
 
   const controlProps = (item) => ({
@@ -171,7 +188,7 @@ function CardTask({ card }) {
                   {dataCart?.comments[0]}
                 </Typography>
                 <Box>
-                  {dataCart.status == 'task_waiting' && (
+                  {(dataCart.status === 'task_waiting' || dataCart.status === 'task_note') && (
                     <Box sx={{
                       display: 'flex',
                       justifyContent: 'space-around',
@@ -340,7 +357,10 @@ function CardTask({ card }) {
         </Box>
         <Box>
           {dataCart?.childrens?.length > 0 &&
-            <ExpandMoreIcon sx={{ fill: '#919eab' }} />
+          <Box onClick={handleChilrenHidden}>
+            {chilrenHiddenIcon}
+          </Box>
+
           }
         </Box>
         {/* {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />} */}
@@ -391,7 +411,9 @@ function CardTask({ card }) {
 
       </Card>
       <Box sx={{
-        pt: '10px'
+        pt: '10px',
+        display: chilrenHidden
+
       }}>
         <CardChildrens ChildrentCards={orderedChildrens} />
       </Box>
