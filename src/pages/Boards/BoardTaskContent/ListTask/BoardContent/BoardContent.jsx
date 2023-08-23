@@ -61,7 +61,7 @@ function BoardContent({ board, users, documents }) {
   }
 
   const findCardByChildrenId = (childrenId) => {
-    return orderedCards.find(cards => cards?.childrens?.map(children => children._id)?.includes(childrenId))
+    return orderedCards.find(card => card?.childrens?.map(children => children._id)?.includes(childrenId))
   }
 
   // Function chung xu ly viec cap nhat lai state trong truong hop di chuyen card giua cac column khac nhau
