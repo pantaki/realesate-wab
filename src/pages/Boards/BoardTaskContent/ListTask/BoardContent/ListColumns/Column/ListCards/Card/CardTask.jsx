@@ -49,7 +49,7 @@ function CardTask({ card }) {
   const [open, setOpen] = useState(false)
   const [openTask, setOpenTask] = useState(false)
   const [selectedValue, setSelectedValue] = useState()
-  const [dataCart, setDataCart] = useState()
+  const [dataCart, setDataCart] = useState(card)
   const [inputEditTask, setInputEditTask] = useState(dataCart?.comments[0])
 
   useEffect(() => {
