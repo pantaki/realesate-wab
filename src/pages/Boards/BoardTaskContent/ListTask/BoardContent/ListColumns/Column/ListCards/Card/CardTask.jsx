@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from '@mui/material/Card'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
@@ -48,8 +48,19 @@ const style2 = {
 function CardTask({ card }) {
   const [open, setOpen] = useState(false)
   const [openTask, setOpenTask] = useState(false)
+  const [selectedValue, setSelectedValue] = useState()
+  const [dataCart, setDataCart] = useState()
+  const [inputEditTask, setInputEditTask] = useState(dataCart?.comments[0])
+
+  useEffect(() => {
+    console.log('useEffect', card)
+    setDataCart(card)
+    console.log('dataCart ', dataCart)
+  }, [card])
+
   const handleOpenTask = () => {
-    if (card.status == 'task_waiting') setOpenTask(true)
+    if (dataCart.status == 'task_waiting') setOpenTask(true)
+    setSelectedValue(dataCart.status)
   }
   const handleCloseTask = () => setOpenTask(false)
 
@@ -61,8 +72,8 @@ function CardTask({ card }) {
   }
 
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
-    id: card._id,
-    data: { ...card }
+    id: dataCart._id,
+    data: { ...dataCart }
   })
 
   const dndKitCardStyle = {
@@ -75,23 +86,40 @@ function CardTask({ card }) {
   }
 
   const shouldShowCardActions = () => {
-    return (!!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length) && card.status === 'task_note'
+    return (!!dataCart?.memberIds?.length || !!dataCart?.comments?.length || !!dataCart?.attachments?.length) && dataCart.status === 'task_note'
   }
 
-  const orderedChildrens = mapOrder(card?.childrens, card?.cardChildrenOrderIds, '_id')
+  const orderedChildrens = mapOrder(dataCart?.childrens, dataCart?.cardChildrenOrderIds, '_id')
 
   const TaskColor = (theme) => {
-    if (card.status === 'task_done') return theme.taskColor.task_done
-    if (card.status === 'task_note') return theme.taskColor.task_note
-    if (card.status === 'task_waiting') return theme.taskColor.task_waiting
-    if (card.status === 'task_grey') return theme.taskColor.task_grey
+    if (dataCart.status === 'task_done') return theme.taskColor.task_done
+    if (dataCart.status === 'task_note') return theme.taskColor.task_note
+    if (dataCart.status === 'task_waiting') return theme.taskColor.task_waiting
+    if (dataCart.status === 'task_grey') return theme.taskColor.task_grey
   }
 
   function handleReplyEdit() {
-    console.log('handleReplyEdit ' )
+    dataCart.status = selectedValue
+    setDataCart(dataCart)
     setOpenTask(false)
+    if(inputEditTask !== dataCart.comments[0])
+    dataCart.comments[0] = inputEditTask
+    setDataCart(dataCart)
+    setInputEditTask(dataCart.comments[0])
 
   }
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value)
+  }
+
+  const controlProps = (item) => ({
+    checked: selectedValue === item,
+    onChange: handleChange,
+    value: item,
+    name: 'color-radio-button-status',
+    inputProps: { 'aria-label': item }
+  })
+
   return (
     <Box>
       <Card
@@ -137,13 +165,13 @@ function CardTask({ card }) {
                   variant="h6"
                   component="h2"
                 >
-                  Edit Task Detail {card?._id}
+                  Edit Task Detail {dataCart?._id}
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  {card?.comments[0]}
+                  {dataCart?.comments[0]}
                 </Typography>
                 <Box>
-                  {card.status == 'task_waiting' && (
+                  {dataCart.status == 'task_waiting' && (
                     <Box sx={{
                       display: 'flex',
                       justifyContent: 'space-around',
@@ -165,10 +193,10 @@ function CardTask({ card }) {
                           backgroundColor: '#ababab'
                         }}></Box>
                         <Radio
-                          // {...selectedValue === 'task_grey'
-                          // ? 'disabled' : ''}
+                          {...selectedValue === 'task_grey'
+                          ? 'disabled' : ''}
                         
-                          // {...controlProps('task_grey')}
+                          {...controlProps('task_grey')}
                           sx={{
                             color: '#ababab',
                             '&.Mui-checked': {
@@ -193,9 +221,9 @@ function CardTask({ card }) {
                           backgroundColor: '#01b10a'
                         }}></Box>
                         <Radio
-                          // {...selectedValue === 'task_done'
-                          // ? 'disabled' : ''}
-                          // {...controlProps('task_done')}
+                          {...selectedValue === 'task_done'
+                          ? 'disabled' : ''}
+                          {...controlProps('task_done')}
                           sx={{
                             color: '#01b10a',
                             '&.Mui-checked': {
@@ -221,7 +249,7 @@ function CardTask({ card }) {
                         }}>x</Box>
                         <Radio
                           disabled
-                          // {...controlProps('task_donena')}
+                          {...controlProps('task_donena')}
                           sx={{
                             color: '#01b10a',
                             '&.Mui-checked': {
@@ -246,7 +274,7 @@ function CardTask({ card }) {
                           backgroundColor: '#f5c916'
                         }}></Box>
                         <Radio
-                          // {...controlProps('task_waiting')}
+                          {...controlProps('task_waiting')}
                           sx={{
                             color: '#f5c916',
                             '&.Mui-checked': {
@@ -271,7 +299,8 @@ function CardTask({ card }) {
                           backgroundColor: '#d10101'
                         }}></Box>
                         <Radio
-                          // {...controlProps('task_note')}
+                          name="radio-buttons-status"
+                          {...controlProps('task_note')}
                           sx={{
                             color: '#d10101',
                             '&.Mui-checked': {
@@ -295,8 +324,8 @@ function CardTask({ card }) {
                     label="Type note here"
                     multiline
                     rows={4}
-                    // onChange={(v) => setInputEditTask(v.target.value) }
-                    // defaultValue={inputEditTask}
+                    onChange={(v) => setInputEditTask(v.target.value) }
+                    defaultValue={inputEditTask}
                   />
                 </Box>
                 <div className="button-modal">
@@ -310,9 +339,9 @@ function CardTask({ card }) {
           </Modal>
         </Box>
         <Box>
-        {card?.childrens?.length &&
-          <ExpandMoreIcon sx={{ fill: '#919eab' }} />
-        }
+          {dataCart?.childrens?.length > 0 &&
+            <ExpandMoreIcon sx={{ fill: '#919eab' }} />
+          }
         </Box>
         {/* {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />} */}
 
@@ -321,18 +350,18 @@ function CardTask({ card }) {
             <Typography sx={{
               fontSize: '13px',
               textAlign: 'left'
-            }}>{card?.title}</Typography>
+            }}>{dataCart?.title}</Typography>
           </CardContent>
           {shouldShowCardActions() &&
             <CardActions sx={{ p: '0 4px 8px 4px' }}>
-              {!!card?.memberIds?.length &&
-                <Button size="small" startIcon={<GroupIcon />}>{card?.memberIds?.length}</Button>
+              {!!dataCart?.memberIds?.length &&
+                <Button size="small" startIcon={<GroupIcon />}>{dataCart?.memberIds?.length}</Button>
               }
-              {!!card?.comments?.length &&
-                <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{card?.comments?.length}</Button>
+              {!!dataCart?.comments?.length &&
+                <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{dataCart?.comments?.length}</Button>
               }
-              {!!card?.attachments?.length &&
-                <Button size="small" startIcon={<AttachmentIcon />}>{card?.attachments?.length}</Button>
+              {!!dataCart?.attachments?.length &&
+                <Button size="small" startIcon={<AttachmentIcon />}>{dataCart?.attachments?.length}</Button>
               }
             </CardActions>
           }
@@ -352,7 +381,7 @@ function CardTask({ card }) {
               }}>
                 <h2 id="child-modal-title">User1:</h2>
                 <p id="child-modal-description">
-                  {card?.comments}
+                  {dataCart?.comments}
                 </p>
                 <Button onClick={handleClose}>Close</Button>
               </Box>
