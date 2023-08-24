@@ -20,7 +20,7 @@ import {
   closestCorners
 } from '@dnd-kit/core'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, board }) {
 // https://docs.dndkit.com/presets/sortable/sortable-context
 // items: const [items] = useState([1, 2, 3]);
   return (
@@ -34,7 +34,7 @@ function ListColumns({ columns }) {
         overflowY: 'hidden',
         '&::-webkit-scrollbar-track': { m: 2 }
       }}>
-        {columns?.map(column => (<Column key={column._id} column={column} />))}
+        {columns?.map(column => (<Column key={column._id} cards={column.cards} column={column} columns={columns} board={board} />))}
         {/* Box Add new column */}
         {/* <Box sx={{
           minWidth: '200px',

@@ -297,7 +297,7 @@ function BoardContent({ board, users, documents }) {
           <Box sx={{
             display: 'flex'
           }}>
-            <ListColumns columns={orderedColumns} />
+            <ListColumns columns={orderedColumns} board={board} />
             <DragOverlay dropAnimation={customDropAnimation}>
               {!activeDragItemType && null}
               {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}

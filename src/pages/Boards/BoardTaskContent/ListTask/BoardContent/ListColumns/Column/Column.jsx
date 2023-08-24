@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect , useState } from 'react'
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
@@ -21,8 +21,25 @@ import { mapOrder } from '~/utils/sorts'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import ListCardsHeader from './ListCardsHeader/ListCardsHeader'
+import Fade from '@mui/material/Fade'
+import Modal from '@mui/material/Modal'
+import TextField from '@mui/material/TextField'
+import Backdrop from '@mui/material/Backdrop'
 
-function Column({ column }) {
+const style2 = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+  backgroundColor: '#fff5c7',
+}
+
+function Column({ cards, column, columns, board }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: { ...column }
@@ -39,15 +56,90 @@ function Column({ column }) {
   }
 
   const [anchorEl, setAnchorEl] = useState(null)
+  const [columnData, setColumnData] = useState(column)
+  const [columnsData, setColumnsData] = useState(columns)
+  const [boardData, setBoardData] = useState(board)
+  const [openNewTask, setOpenNewTask] = useState(false)
+  const [selectedValueName, setSelectedValueName] = useState()
+  const [inputNewTask, setInputNewTask] = useState('')
+  const [dataCards, setDataCards] = useState(cards)
+  const [cardOrderIds, setCardOrderIds] = useState(column.cardOrderIds)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log('count', count)
+    console.log('boardData', boardData)
+    console.log('columnData', columnData)
+    console.log('cardOrderIds', cardOrderIds)
+    // const convertId = CardConvertId(columnsData.lastColumnCardId)
+    // columnData.cardOrderIds = cardOrderIds
+    // columnData.cards = dataCards
+    // columnData.cardLastId = convertId
+    // columnsData.lastColumnCardId = convertId
+    // setColumnData(columnData)
+    // setColumnsData(columnsData)
+}, [ cardOrderIds, columnData, columnsData, boardData, count, dataCards])
+
+  const handleOpenTask = () => {
+    setCount(count + 1)
+    setOpenNewTask(true)
+  }
+
+  const handleCloseNewTask = () => setOpenNewTask(false)
+
+  function handleSaveNewName() {
+
+    const convertId = CardConvertId(boardData.lastColumnCardId)
+    console.log('handleNewCard column: ', columnData )
+
+
+    if(cardOrderIds.indexOf(convertId) === -1) {
+      const arrNew = {
+        _id: convertId,
+        boardId: 'board-id-01',
+        columnId: columnData?.cards[0].columnId,
+        childrens: [],
+        status: 'task_grey',
+        title: inputNewTask,
+        description: null,
+        cover: null,
+        memberIds: [],
+        comments: [],
+        attachments: []
+      }
+      setDataCards( (dataCards) => [...dataCards, arrNew])
+      setCardOrderIds( (cardOrderIds) => [...cardOrderIds, convertId])
+      columnData.cardOrderIds = cardOrderIds
+      columnData.cards = dataCards
+      columnData.cardLastId = convertId
+      boardData.lastColumnCardId = convertId
+      setColumnData(columnData)
+      setBoardData(boardData)
+
+    }
+    setInputNewTask('')
+    setOpenNewTask(false)
+
+  }
+
   const open = Boolean(anchorEl)
   const handleClick = (event) => { setAnchorEl(event.currentTarget) }
   const handleClose = () => { setAnchorEl(null) }
 
-  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
+  const orderedCards = mapOrder(columnData?.cards, columnData?.cardOrderIds, '_id')
 
-  const handleNewCard = () => {
-    console.log('handleNewCard: ', column )
+  const CardConvertId = (id) => {
+    const arrData = id.split('-')
+    const idNew = parseInt(arrData[2]) + 1
+    const dataConvert = arrData[0] + '-' + arrData[1] + '-' + idNew
+    return dataConvert
   }
+
+  const newTaskData = (data, newValue) => {
+    setDataCards( (data) => [...data, newValue])
+  }
+
+ 
 
   return (
     // <div ref={setNodeRef} style={dndKitColumnStyle} {...attributes} >
@@ -82,7 +174,7 @@ function Column({ column }) {
         }}>
           <Box sx={{
             p: '10px 0'
-          }}>{column.title}</Box>
+          }}>{columnData.title} {count}</Box>
           <ListCardsHeader cards={orderedCards} />
         </Box>
       </Box>
@@ -102,7 +194,7 @@ function Column({ column }) {
           p: '10px 0',
           textTransform: 'uppercase'
         }}>
-          {column?.title}
+          {columnData?.title}
         </Typography>
         {/* <Box>
           <Tooltip title="More Option">
@@ -163,10 +255,60 @@ function Column({ column }) {
         alignItems: 'center',
         justifyContent: 'space-between'
       }}>
-        <Button onClick={handleNewCard} startIcon={<AddCardIcon />}>Add new card</Button>
+        <Button onClick={handleOpenTask} startIcon={<AddCardIcon />}>Add new card</Button>
         <Tooltip title="Drap to move">
           <DragHandleIcon sx={{ cursor: 'pointer' }} />
         </Tooltip>
+      </Box>
+      <Box>
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={openNewTask}
+          onClose={handleCloseNewTask}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500
+            }
+          }}
+        >
+          <Fade in={openNewTask}>
+            {/* <Box sx={style}> */}
+            <Box sx={style2}>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+              >
+                New Task
+              </Typography>
+              <Box sx={{
+                display: 'grid',
+                m: '20px 0',
+                width: '100%'
+              }}>
+                {/* <input ref={inputEditTask} type="text" /> */}
+                {/* <Textarea placeholder="Type anything…" />; */}
+                <TextField
+                  id="outlined-multiline-static-new-task"
+                  label="Type text here"
+                  multiline
+                  rows={4}
+                  onChange={(v) => setInputNewTask(v.target.value) }
+                  defaultValue={inputNewTask}
+                />
+              </Box>
+              <div className="button-modal">
+                <Button variant="contained" onClick={handleSaveNewName}>
+                  Save Task
+                </Button>
+              </div>
+            </Box>
+            {/* </Box> */}
+          </Fade>
+        </Modal>
       </Box>
     </Box>
     // </div>

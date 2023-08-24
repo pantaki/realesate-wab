@@ -23,6 +23,10 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight'
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
 import EditIcon from '@mui/icons-material/Edit'
+import Checkbox from '@mui/material/Checkbox'
+import FormGroup from '@mui/material/FormGroup'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import FormControl from '@mui/material/FormControl'
 
 const style = {
   position: 'absolute',
@@ -40,7 +44,7 @@ const style2 = {
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 500,
   bgcolor: 'background.paper',
   border: '2px solid #000',
   boxShadow: 24,
@@ -70,16 +74,18 @@ function CardTask({ card }) {
   const [selectedValue, setSelectedValue] = useState()
   const [selectedValueName, setSelectedValueName] = useState()
   const [dataCart, setDataCart] = useState(card)
-  const [inputEditTask, setInputEditTask] = useState(dataCart?.comments[0])
+  const [inputEditTask, setInputEditTask] = useState(dataCart?.title)
+  const [inputAddNote, setInputAddNote] = useState('')
+  const [inputEditTaskComment, setInputEditTaskComment] = useState(dataCart?.comments[0])
   const [inputEditTaskName, setInputEditTaskName] = useState(dataCart?.title)
+  const [taskComment, setTaskComment] = useState(dataCart?.comments[0])
   const [chilrenHidden, setChilrenHidden] = useState('block')
   const [chilrenHiddenIcon, setChilrenHiddenIcon] = useState(<KeyboardArrowDownIcon sx={{ fill: '#919eab' }} />)
 
-  // useEffect(() => {
-  //   console.log('useEffect', card)
-  //   setDataCart(card)
-  //   console.log('dataCart ', dataCart)
-  // }, [card])
+  useEffect(() => {
+    console.log('taskComment', dataCart)
+
+  }, [dataCart, selectedValue, inputEditTask])
 
   const handleOpenTask = () => {
     if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') setOpenTask(true)
@@ -88,7 +94,7 @@ function CardTask({ card }) {
   const handleCloseTask = () => setOpenTask(false)
 
   const handleOpenTaskName = () => {
-    // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') 
+    // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note')
     setOpenTaskName(true)
     setSelectedValueName(dataCart.title)
 
@@ -212,11 +218,36 @@ function CardTask({ card }) {
                     variant="h6"
                     component="h2"
                   >
-                    Edit Task Detail {dataCart?._id}
+                    <Box sx={{
+                      display: 'grid',
+                      m: '20px 0',
+                      width: '100%'
+                    }}>
+                      {/* <input ref={inputEditTask} type="text" /> */}
+                      {/* <Textarea placeholder="Type anything…" />; */}
+                      <TextField
+                        id="outlined-multiline-static"
+                        label="Task Name"
+                        multiline
+                        rows={4}
+                        onChange={(v) => setInputEditTask(v.target.value) }
+                        defaultValue={inputEditTask}
+                      />
+                    </Box>
                   </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    {dataCart?.comments[0]}
-                  </Typography>
+                  
+                  <Box>
+                    <Typography
+                      sx={{
+                        fontSize: '15px',
+                        fontWeight: '500',
+                        textTransform: 'uppercase'
+                      }}
+                      variant="subtitle1" gutterBottom
+                    >
+                      Task Status
+                    </Typography>
+                  </Box>
                   <Box>
                     {(dataCart.status === 'task_waiting' || dataCart.status === 'task_note') && (
                       <Box sx={{
@@ -224,6 +255,7 @@ function CardTask({ card }) {
                         justifyContent: 'space-around',
                         m: 2
                       }}>
+                        
                         <Box sx={{
                           textAlign: 'center',
                           fontSize: '12px',
@@ -241,10 +273,10 @@ function CardTask({ card }) {
                           }}></Box>
                           <Radio
                             {...selectedValue === 'task_grey'
-                            ? 'disabled' : ''}
-                          
+                              ? 'disabled' : ''}
                             {...controlProps('task_grey')}
                             sx={{
+                              p: '9px 0',
                               color: '#ababab',
                               '&.Mui-checked': {
                                 color: '#ababab',
@@ -272,6 +304,7 @@ function CardTask({ card }) {
                               ? 'disabled' : ''}
                             {...controlProps('task_done')}
                             sx={{
+                              p: '9px 0',
                               color: '#01b10a',
                               '&.Mui-checked': {
                                 color: '#01b10a',
@@ -298,6 +331,7 @@ function CardTask({ card }) {
                             disabled
                             {...controlProps('task_donena')}
                             sx={{
+                              p: '9px 0',
                               color: '#01b10a',
                               '&.Mui-checked': {
                                 color: '#01b10a',
@@ -323,6 +357,7 @@ function CardTask({ card }) {
                           <Radio
                             {...controlProps('task_waiting')}
                             sx={{
+                              p: '9px 0',
                               color: '#f5c916',
                               '&.Mui-checked': {
                                 color: '#f5c916',
@@ -349,6 +384,7 @@ function CardTask({ card }) {
                             name="radio-buttons-status"
                             {...controlProps('task_note')}
                             sx={{
+                              p: '9px 0',
                               color: '#d10101',
                               '&.Mui-checked': {
                                 color: '#d10101',
@@ -359,6 +395,73 @@ function CardTask({ card }) {
                       </Box>
                     )}
                   </Box>
+                  <Box>
+                    <Typography
+                      sx={{
+                        fontSize: '15px',
+                        fontWeight: '500',
+                        textTransform: 'uppercase'
+                      }}
+                      variant="subtitle1" gutterBottom
+                    >
+                      Task Notes
+                    </Typography>
+                  </Box>
+
+                  <Box sx={{
+                    display: 'flex'
+                  }}>
+                    <Box>
+                      {!!dataCart?.comments?.length &&
+                        <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{dataCart?.comments?.length}</Button>
+                      }
+                    </Box>
+
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: '13px',
+                          fontWeight: '400'
+                        }}
+                        variant="subtitle2" gutterBottom
+                      >
+                        {taskComment?.comment}
+                      </Typography>
+                      <Typography
+                        sx={{
+                          fontSize: '13px',
+                          fontWeight: '400'
+                        }}
+                        variant="subtitle2" gutterBottom
+                      >
+                        {taskComment?.userName} , {taskComment?.date}
+                      </Typography>
+                    </Box>
+
+                  </Box>
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    fontSize: '13px'
+                  }}>
+                    <FormControl component="fieldset">
+                      <FormGroup aria-label="position" row>
+                        <FormControlLabel
+                          value="end"
+                          control={<Checkbox />}
+                          label="Cleia"
+                          labelPlacement="end"
+                        />
+                        <FormControlLabel
+                          value="end"
+                          control={<Checkbox />}
+                          label="Julia"
+                          labelPlacement="end"
+                        />
+                      </FormGroup>
+                    </FormControl>
+                  </Box>
+                  
                   <Box sx={{
                     display: 'grid',
                     m: '20px 0',
@@ -368,16 +471,16 @@ function CardTask({ card }) {
                     {/* <Textarea placeholder="Type anything…" />; */}
                     <TextField
                       id="outlined-multiline-static"
-                      label="Type note here"
+                      label="Add Note"
                       multiline
                       rows={4}
-                      onChange={(v) => setInputEditTask(v.target.value) }
-                      defaultValue={inputEditTask}
+                      onChange={(v) => setInputAddNote(v.target.value) }
+                      defaultValue={inputAddNote}
                     />
                   </Box>
                   <div className="button-modal">
                     <Button variant="contained" onClick={handleReplyEdit}>
-                      Save Note
+                      Save Task
                     </Button>
                   </div>
                 </Box>
@@ -415,7 +518,7 @@ function CardTask({ card }) {
                 }
               </CardActions>
             }
-            <Box>
+            {/* <Box>
               <Modal
                 open={open}
                 onClose={handleClose}
@@ -436,10 +539,10 @@ function CardTask({ card }) {
                   <Button onClick={handleClose}>Close</Button>
                 </Box>
               </Modal>
-            </Box>
+            </Box> */}
           </Box>
           <Box>
-            <EditIcon sx={{ px: '4px', fill: '#919eab' }} onClick={handleOpenTaskName}/>
+            {/* <EditIcon sx={{ px: '4px', fill: '#919eab' }} onClick={handleOpenTaskName}/> */}
             <Box>
               <Modal
                 aria-labelledby="transition-modal-title"
