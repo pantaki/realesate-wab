@@ -176,6 +176,7 @@ function CardTask({ card }) {
     <div ref={setNodeRef} style={dndKitCardStyle} {...attributes} >
       <Box>
         <Card
+          onClick={handleOpenTask}
           ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
           sx={{
             cursor: 'pointer',
@@ -184,7 +185,9 @@ function CardTask({ card }) {
             maxWidth: '300px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            transition: '0.7s',
+            '&:hover': { opacity: '0.7'}
           }}>
           <Box>
             <Box sx={{
@@ -196,297 +199,8 @@ function CardTask({ card }) {
               p: 2,
               transition: '0.7s',
               '&:hover': { opacity: '0.7'}
-            }} onClick={handleOpenTask}></Box>
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              open={openTask}
-              onClose={handleCloseTask}
-              closeAfterTransition
-              slots={{ backdrop: Backdrop }}
-              slotProps={{
-                backdrop: {
-                  timeout: 500
-                }
-              }}
-            >
-              <Fade in={openTask}>
-                {/* <Box sx={style}> */}
-                <Box sx={style2}>
-                  <Typography
-                    id="modal-modal-title"
-                    variant="h6"
-                    component="h2"
-                  >
-                    <Box sx={{
-                      display: 'grid',
-                      m: '20px 0',
-                      width: '100%'
-                    }}>
-                      {/* <input ref={inputEditTask} type="text" /> */}
-                      {/* <Textarea placeholder="Type anything…" />; */}
-                      <TextField
-                        id="outlined-multiline-static"
-                        label="Task Name"
-                        multiline
-                        rows={4}
-                        onChange={(v) => setInputEditTask(v.target.value) }
-                        defaultValue={inputEditTask}
-                      />
-                    </Box>
-                  </Typography>
-                  
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontSize: '15px',
-                        fontWeight: '500',
-                        textTransform: 'uppercase'
-                      }}
-                      variant="subtitle1" gutterBottom
-                    >
-                      Task Status
-                    </Typography>
-                  </Box>
-                  <Box>
-                    {(dataCart.status === 'task_waiting' || dataCart.status === 'task_note') && (
-                      <Box sx={{
-                        display: 'flex',
-                        justifyContent: 'space-around',
-                        m: 2
-                      }}>
-                        
-                        <Box sx={{
-                          textAlign: 'center',
-                          fontSize: '12px',
-                          textTransform: 'uppercase',
-                          width: '12%'
-                        }}>
-                          <Box sx={{
-                            width: '30px',
-                            height: '30px',
-                            margin: '5px auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#ababab'
-                          }}></Box>
-                          <Radio
-                            {...selectedValue === 'task_grey'
-                              ? 'disabled' : ''}
-                            {...controlProps('task_grey')}
-                            sx={{
-                              p: '9px 0',
-                              color: '#ababab',
-                              '&.Mui-checked': {
-                                color: '#ababab',
-                              },
-                            }}
-                          />  Not Done
-                        </Box>
-                        <Box sx={{
-                          textAlign: 'center',
-                          fontSize: '12px',
-                          textTransform: 'uppercase',
-                          width: '12%'
-                        }}>
-                          <Box sx={{
-                            width: '30px',
-                            height: '30px',
-                            margin: '5px auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#01b10a'
-                          }}></Box>
-                          <Radio
-                            {...selectedValue === 'task_done'
-                              ? 'disabled' : ''}
-                            {...controlProps('task_done')}
-                            sx={{
-                              p: '9px 0',
-                              color: '#01b10a',
-                              '&.Mui-checked': {
-                                color: '#01b10a',
-                              },
-                            }}
-                          />
-                        </Box>
-                        <Box sx={{
-                          textAlign: 'center',
-                          fontSize: '12px',
-                          textTransform: 'uppercase',
-                          width: '12%'
-                        }}>
-                          <Box sx={{
-                            width: '30px',
-                            height: '30px',
-                            margin: '5px auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#01b10a'
-                          }}>x</Box>
-                          <Radio
-                            disabled
-                            {...controlProps('task_donena')}
-                            sx={{
-                              p: '9px 0',
-                              color: '#01b10a',
-                              '&.Mui-checked': {
-                                color: '#01b10a',
-                              },
-                            }}
-                          />  Done NA
-                        </Box>
-                        <Box sx={{
-                          textAlign: 'center',
-                          fontSize: '12px',
-                          textTransform: 'uppercase',
-                          width: '12%'
-                        }}>
-                          <Box sx={{
-                            width: '30px',
-                            height: '30px',
-                            margin: '5px auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#f5c916'
-                          }}></Box>
-                          <Radio
-                            {...controlProps('task_waiting')}
-                            sx={{
-                              p: '9px 0',
-                              color: '#f5c916',
-                              '&.Mui-checked': {
-                                color: '#f5c916',
-                              },
-                            }}
-                          />  Wait for
-                        </Box>
-                        <Box sx={{
-                          textAlign: 'center',
-                          fontSize: '12px',
-                          textTransform: 'uppercase',
-                          width: '12%'
-                        }}>
-                          <Box sx={{
-                            width: '30px',
-                            height: '30px',
-                            margin: '5px auto',
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#d10101'
-                          }}></Box>
-                          <Radio
-                            name="radio-buttons-status"
-                            {...controlProps('task_note')}
-                            sx={{
-                              p: '9px 0',
-                              color: '#d10101',
-                              '&.Mui-checked': {
-                                color: '#d10101',
-                              },
-                            }}
-                          />  Note for
-                        </Box>
-                      </Box>
-                    )}
-                  </Box>
-                  <Box>
-                    <Typography
-                      sx={{
-                        fontSize: '15px',
-                        fontWeight: '500',
-                        textTransform: 'uppercase'
-                      }}
-                      variant="subtitle1" gutterBottom
-                    >
-                      Task Notes
-                    </Typography>
-                  </Box>
-
-                  <Box sx={{
-                    display: 'flex'
-                  }}>
-                    <Box>
-                      {!!dataCart?.comments?.length &&
-                        <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{dataCart?.comments?.length}</Button>
-                      }
-                    </Box>
-
-                    <Box>
-                      <Typography
-                        sx={{
-                          fontSize: '13px',
-                          fontWeight: '400'
-                        }}
-                        variant="subtitle2" gutterBottom
-                      >
-                        {taskComment?.comment}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: '13px',
-                          fontWeight: '400'
-                        }}
-                        variant="subtitle2" gutterBottom
-                      >
-                        {taskComment?.userName} , {taskComment?.date}
-                      </Typography>
-                    </Box>
-
-                  </Box>
-                  <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    fontSize: '13px'
-                  }}>
-                    <FormControl component="fieldset">
-                      <FormGroup aria-label="position" row>
-                        <FormControlLabel
-                          value="end"
-                          control={<Checkbox />}
-                          label="Cleia"
-                          labelPlacement="end"
-                        />
-                        <FormControlLabel
-                          value="end"
-                          control={<Checkbox />}
-                          label="Julia"
-                          labelPlacement="end"
-                        />
-                      </FormGroup>
-                    </FormControl>
-                  </Box>
-                  
-                  <Box sx={{
-                    display: 'grid',
-                    m: '20px 0',
-                    width: '100%'
-                  }}>
-                    {/* <input ref={inputEditTask} type="text" /> */}
-                    {/* <Textarea placeholder="Type anything…" />; */}
-                    <TextField
-                      id="outlined-multiline-static"
-                      label="Add Note"
-                      multiline
-                      rows={4}
-                      onChange={(v) => setInputAddNote(v.target.value) }
-                      defaultValue={inputAddNote}
-                    />
-                  </Box>
-                  <div className="button-modal">
-                    <Button variant="contained" onClick={handleReplyEdit}>
-                      Save Task
-                    </Button>
-                  </div>
-                </Box>
-                {/* </Box> */}
-              </Fade>
-            </Modal>
+            }} ></Box>
+            
           </Box>
           <Box>
             {dataCart?.childrens?.length > 0 &&
@@ -541,60 +255,355 @@ function CardTask({ card }) {
               </Modal>
             </Box> */}
           </Box>
-          <Box>
-            {/* <EditIcon sx={{ px: '4px', fill: '#919eab' }} onClick={handleOpenTaskName}/> */}
-            <Box>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                open={openTaskName}
-                onClose={handleCloseTaskName}
-                closeAfterTransition
-                slots={{ backdrop: Backdrop }}
-                slotProps={{
-                  backdrop: {
-                    timeout: 500
-                  }
-                }}
+          
+        </Card>
+
+        {/* edit task detail */}
+        <Modal
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+          open={openTask}
+          onClose={handleCloseTask}
+          closeAfterTransition
+          slots={{ backdrop: Backdrop }}
+          slotProps={{
+            backdrop: {
+              timeout: 500
+            }
+          }}
+        >
+          <Fade in={openTask}>
+            {/* <Box sx={style}> */}
+            <Box sx={style2}>
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
               >
-                <Fade in={openTaskName}>
-                  {/* <Box sx={style}> */}
-                  <Box sx={style2}>
-                    <Typography
-                      id="modal-modal-title"
-                      variant="h6"
-                      component="h2"
-                    >
-                      Edit Task Name
-                    </Typography>
+                <Box sx={{
+                  display: 'grid',
+                  m: '20px 0',
+                  width: '100%'
+                }}>
+                  {/* <input ref={inputEditTask} type="text" /> */}
+                  {/* <Textarea placeholder="Type anything…" />; */}
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Task Name"
+                    multiline
+                    rows={4}
+                    onChange={(v) => setInputEditTask(v.target.value) }
+                    defaultValue={inputEditTask}
+                  />
+                </Box>
+              </Typography>
+              
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: '15px',
+                    fontWeight: '500',
+                    textTransform: 'uppercase'
+                  }}
+                  variant="subtitle1" gutterBottom
+                >
+                  Task Status
+                </Typography>
+              </Box>
+              <Box>
+                {(dataCart.status === 'task_waiting' || dataCart.status === 'task_note') && (
+                  <Box sx={{
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    m: 2
+                  }}>
+                    
                     <Box sx={{
-                      display: 'grid',
-                      m: '20px 0',
-                      width: '100%'
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
                     }}>
-                      {/* <input ref={inputEditTask} type="text" /> */}
-                      {/* <Textarea placeholder="Type anything…" />; */}
-                      <TextField
-                        id="outlined-multiline-static-task-name"
-                        label="Type text here"
-                        multiline
-                        rows={4}
-                        onChange={(v) => setInputEditTaskName(v.target.value) }
-                        defaultValue={inputEditTaskName}
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#ababab'
+                      }}></Box>
+                      <Radio
+                        {...selectedValue === 'task_grey'
+                          ? 'disabled' : ''}
+                        {...controlProps('task_grey')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#ababab',
+                          '&.Mui-checked': {
+                            color: '#ababab',
+                          },
+                        }}
+                      />  Not Done
+                    </Box>
+                    <Box sx={{
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
+                    }}>
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#01b10a'
+                      }}></Box>
+                      <Radio
+                        {...selectedValue === 'task_done'
+                          ? 'disabled' : ''}
+                        {...controlProps('task_done')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#01b10a',
+                          '&.Mui-checked': {
+                            color: '#01b10a',
+                          },
+                        }}
                       />
                     </Box>
-                    <div className="button-modal">
-                      <Button variant="contained" onClick={handleReplyEditName}>
-                        Save Task
-                      </Button>
-                    </div>
+                    <Box sx={{
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
+                    }}>
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#01b10a'
+                      }}>x</Box>
+                      <Radio
+                        disabled
+                        {...controlProps('task_donena')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#01b10a',
+                          '&.Mui-checked': {
+                            color: '#01b10a',
+                          },
+                        }}
+                      />  Done NA
+                    </Box>
+                    <Box sx={{
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
+                    }}>
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#f5c916'
+                      }}></Box>
+                      <Radio
+                        {...controlProps('task_waiting')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#f5c916',
+                          '&.Mui-checked': {
+                            color: '#f5c916',
+                          },
+                        }}
+                      />  Wait for
+                    </Box>
+                    <Box sx={{
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
+                    }}>
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#d10101'
+                      }}></Box>
+                      <Radio
+                        name="radio-buttons-status"
+                        {...controlProps('task_note')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#d10101',
+                          '&.Mui-checked': {
+                            color: '#d10101',
+                          },
+                        }}
+                      />  Note for
+                    </Box>
                   </Box>
-                  {/* </Box> */}
-                </Fade>
-              </Modal>
+                )}
+              </Box>
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: '15px',
+                    fontWeight: '500',
+                    textTransform: 'uppercase'
+                  }}
+                  variant="subtitle1" gutterBottom
+                >
+                  Task Notes
+                </Typography>
+              </Box>
+
+              <Box sx={{
+                display: 'flex'
+              }}>
+                <Box>
+                  {!!dataCart?.comments?.length &&
+                    <Button size="small" startIcon={<CommentIcon />} onClick={handleOpen}>{dataCart?.comments?.length}</Button>
+                  }
+                </Box>
+
+                <Box>
+                  <Typography
+                    sx={{
+                      fontSize: '13px',
+                      fontWeight: '400'
+                    }}
+                    variant="subtitle2" gutterBottom
+                  >
+                    {taskComment?.comment}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      fontSize: '13px',
+                      fontWeight: '400'
+                    }}
+                    variant="subtitle2" gutterBottom
+                  >
+                    {taskComment?.userName} , {taskComment?.date}
+                  </Typography>
+                </Box>
+
+              </Box>
+              <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                fontSize: '13px'
+              }}>
+                <FormControl component="fieldset">
+                  <FormGroup aria-label="position" row>
+                    <FormControlLabel
+                      value="end"
+                      control={<Checkbox />}
+                      label="Cleia"
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      value="end"
+                      control={<Checkbox />}
+                      label="Julia"
+                      labelPlacement="end"
+                    />
+                  </FormGroup>
+                </FormControl>
+              </Box>
+              
+              <Box sx={{
+                display: 'grid',
+                m: '20px 0',
+                width: '100%'
+              }}>
+                {/* <input ref={inputEditTask} type="text" /> */}
+                {/* <Textarea placeholder="Type anything…" />; */}
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Add Note"
+                  multiline
+                  rows={4}
+                  onChange={(v) => setInputAddNote(v.target.value) }
+                  defaultValue={inputAddNote}
+                />
+              </Box>
+              <div className="button-modal">
+                <Button variant="contained" onClick={handleReplyEdit}>
+                  Save Task
+                </Button>
+              </div>
             </Box>
+            {/* </Box> */}
+          </Fade>
+        </Modal>
+
+        {/* edit task name */}
+        <Box>
+            {/* <EditIcon sx={{ px: '4px', fill: '#919eab' }} onClick={handleOpenTaskName}/> */}
+          <Box>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              open={openTaskName}
+              onClose={handleCloseTaskName}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{
+                backdrop: {
+                  timeout: 500
+                }
+              }}
+            >
+              <Fade in={openTaskName}>
+                {/* <Box sx={style}> */}
+                <Box sx={style2}>
+                  <Typography
+                    id="modal-modal-title"
+                    variant="h6"
+                    component="h2"
+                  >
+                    Edit Task Name
+                  </Typography>
+                  <Box sx={{
+                    display: 'grid',
+                    m: '20px 0',
+                    width: '100%'
+                  }}>
+                    {/* <input ref={inputEditTask} type="text" /> */}
+                    {/* <Textarea placeholder="Type anything…" />; */}
+                    <TextField
+                      id="outlined-multiline-static-task-name"
+                      label="Type text here"
+                      multiline
+                      rows={4}
+                      onChange={(v) => setInputEditTaskName(v.target.value) }
+                      defaultValue={inputEditTaskName}
+                    />
+                  </Box>
+                  <div className="button-modal">
+                    <Button variant="contained" onClick={handleReplyEditName}>
+                      Save Task
+                    </Button>
+                  </div>
+                </Box>
+                {/* </Box> */}
+              </Fade>
+            </Modal>
           </Box>
-        </Card>
+        </Box>
         <Box sx={{
           pt: '10px',
           display: chilrenHidden
