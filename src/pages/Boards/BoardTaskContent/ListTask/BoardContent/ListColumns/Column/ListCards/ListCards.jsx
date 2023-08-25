@@ -35,7 +35,7 @@ function ListCards({ cards }) {
           '&::-webkit-scrollbar-thumb' : { backgroundColor: '#ced0da' },
           '&::-webkit-scrollbar-thumb:hover' : { backgroundColor: '#bfc2cf' }
         }}>
-        {cards?.map(card => <CardTask key={card._id} card={card} />)}
+        {cards?.map((card, index) => <CardTask key={card._id} cards={cards} card={card} index={index} />)}
       </Box>
     </SortableContext>
   )

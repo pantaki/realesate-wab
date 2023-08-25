@@ -34,7 +34,7 @@ function ListColumns({ columns, board }) {
         overflowY: 'hidden',
         '&::-webkit-scrollbar-track': { m: 2 }
       }}>
-        {columns?.map(column => (<Column key={column._id} cards={column.cards} column={column} columns={columns} board={board} />))}
+        {columns?.map((column, index) => (<Column key={column._id} cards={column.cards} column={column} columns={columns} board={board} index={index} />))}
         {/* Box Add new column */}
         {/* <Box sx={{
           minWidth: '200px',

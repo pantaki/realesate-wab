@@ -39,7 +39,7 @@ const style2 = {
   backgroundColor: '#fff5c7',
 }
 
-function Column({ cards, column, columns, board }) {
+function Column({ cards, column, columns, board, index }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: { ...column }

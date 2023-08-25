@@ -846,8 +846,10 @@ export const mockData = {
             description: "Buyer Intro Call (follow MFO buyer's script)",
             cover: '',
             memberIds: ['user-id-01'],
+            commentsLastId: 'comment-id-01',
             comments: [
               {
+                _id: 'comment-id-01',
                 userId: 'user-id-01',
                 userName: 'Ben',
                 comment : 'Remember to take the key for the house',
