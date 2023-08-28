@@ -81,7 +81,7 @@ function CardTask({ cards, card, index }) {
   const [userChecked1, setUserChecked1] = useState(false)
 
   useEffect(() => {
-
+    setDataCarts(dataCarts[index] = dataCart)
   }, [dataCarts, dataCart, selectedValue, inputEditTask])
 
   const handleChangeUser1 = (event) => {
@@ -101,7 +101,8 @@ function CardTask({ cards, card, index }) {
   const handleCloseTask = () => setOpenTask(false)
 
   const shouldShowCardActions = () => {
-    return (!!dataCart?.memberIds?.length || !!dataCart?.comments?.length || !!dataCart?.attachments?.length) && dataCart.status === 'task_note'
+    return (!!dataCart?.memberIds?.length || !!dataCart?.comments?.length || !!dataCart?.attachments?.length)
+    // && dataCart.status === 'task_note'
   }
 
   const orderedChildrens = mapOrder(dataCart?.childrens, dataCart?.cardChildrenOrderIds, '_id')
@@ -114,9 +115,16 @@ function CardTask({ cards, card, index }) {
   }
 
   function handleSaveTask() {
+    let convertId = 0
+    console.log('dataCart.commentsLastId: ', dataCart)
     dataCart.status = selectedValue
     if (inputEditTask !== dataCart.title) dataCart.title = inputEditTask
-    const convertId = CardConvertId(dataCart.commentsLastId)
+    if(dataCart.commentsLastId)  {
+      convertId = CardConvertId(dataCart.commentsLastId)
+    } else {
+      convertId = 'comment-id-01'
+    }
+    
     if(inputAddNote) {
       const commentNew = {
         _id: convertId,
@@ -125,14 +133,18 @@ function CardTask({ cards, card, index }) {
         comment : inputAddNote,
         date: 'Aug. 25 ,2023 20:30 Am'
       }
-      if(dataCart.commentsLastId !== convertId) dataCart.commentsLastId = convertId
+      if(dataCart.commentsLastId !== convertId || dataCart.commentsLastId === '') dataCart.commentsLastId = convertId
+      
       setTaskComment( (taskComment) => [...taskComment, commentNew])
       dataCart.comments = taskComment
+      
+      
     }
     setDataCart(dataCart)
     setInputEditTask(dataCart.title)
     setDataCarts(dataCarts[index] = dataCart)
     setInputAddNote('')
+    console.log('dataCart.commentsLastId after: ', dataCart)
     setOpenTask(false)
   }
   const CardConvertId = (id) => {
@@ -551,7 +563,7 @@ function CardTask({ cards, card, index }) {
                         control={
                           <Checkbox checked={userChecked} onChange={handleChangeUser1} name="cleia" />
                         }
-                        label="Cleia"
+                        label={<Typography style={{fontSize: '13px'}}>Cleia read this</Typography>}
                         labelPlacement="end"
                         color='#fff'
                       />
@@ -565,7 +577,7 @@ function CardTask({ cards, card, index }) {
                         control={
                           <Checkbox checked={userChecked1} onChange={handleChangeUser2} name="julia" />
                         }
-                        label="Julia"
+                        label={<Typography style={{fontSize: '13px'}}>Julia read this</Typography>}
                         labelPlacement="end"
                       />
                     </Box>
