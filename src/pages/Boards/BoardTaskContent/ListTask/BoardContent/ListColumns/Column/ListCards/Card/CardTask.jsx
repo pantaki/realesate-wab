@@ -27,6 +27,10 @@ import Checkbox from '@mui/material/Checkbox'
 import FormGroup from '@mui/material/FormGroup'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import FormControl from '@mui/material/FormControl'
+import * as React from 'react'
+import Stack from '@mui/material/Stack'
+import Snackbar from '@mui/material/Snackbar'
+import MuiAlert from '@mui/material/Alert'
 
 const style = {
   position: 'absolute',
@@ -50,6 +54,9 @@ const style2 = {
   boxShadow: 24,
   p: '15px 20px'
 }
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function CardTask({ cards, card, index }) {
 
@@ -79,10 +86,19 @@ function CardTask({ cards, card, index }) {
   const [chilrenHiddenIcon, setChilrenHiddenIcon] = useState(<KeyboardArrowDownIcon sx={{ fill: '#919eab' }} />)
   const [userChecked, setUserChecked] = useState(false)
   const [userChecked1, setUserChecked1] = useState(false)
+  const [openNoti, setOpenNoti] = React.useState(false)
 
   useEffect(() => {
     setDataCarts(dataCarts[index] = dataCart)
   }, [dataCarts, dataCart, selectedValue, inputEditTask])
+
+  const handleNotiClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setOpenNoti(false)
+  }
 
   const handleChangeUser1 = (event) => {
     setUserChecked(event.target.checked)
@@ -138,7 +154,7 @@ function CardTask({ cards, card, index }) {
       setTaskComment( (taskComment) => [...taskComment, commentNew])
       dataCart.comments = taskComment
       
-      
+      setOpenNoti(true)
     }
     setDataCart(dataCart)
     setInputEditTask(dataCart.title)
@@ -617,7 +633,11 @@ function CardTask({ cards, card, index }) {
             {/* </Box> */}
           </Fade>
         </Modal>
-
+        <Snackbar open={openNoti} autoHideDuration={3000} onClose={handleNotiClose}>
+          <Alert onClose={handleNotiClose} severity="success" sx={{ width: '100%' }}>
+            Update success!
+          </Alert>
+        </Snackbar>
         <Box sx={{
           pt: '10px',
           display: chilrenHidden
