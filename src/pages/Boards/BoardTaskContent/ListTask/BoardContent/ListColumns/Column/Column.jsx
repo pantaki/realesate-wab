@@ -39,7 +39,7 @@ const style2 = {
   backgroundColor: '#fff5c7',
 }
 
-function Column({ cards, column, columns, board, index }) {
+function Column({ column, index }) {
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: column._id,
     data: { ...column }
@@ -56,30 +56,23 @@ function Column({ cards, column, columns, board, index }) {
   }
 
   const [anchorEl, setAnchorEl] = useState(null)
+  // const [orderedCards, setOrderedCards] = useState()
   const [columnData, setColumnData] = useState(column)
-  const [columnsData, setColumnsData] = useState(columns)
-  const [boardData, setBoardData] = useState(board)
+  // const [columnsData, setColumnsData] = useState(columns)
+  // const [boardData, setBoardData] = useState(board)
   const [openNewTask, setOpenNewTask] = useState(false)
-  const [selectedValueName, setSelectedValueName] = useState()
+  // const [selectedValueName, setSelectedValueName] = useState()
   const [inputNewTask, setInputNewTask] = useState('')
-  const [dataCards, setDataCards] = useState(cards)
-  const [cardOrderIds, setCardOrderIds] = useState(column.cardOrderIds)
+  // const [dataCards, setDataCards] = useState(cards)
+  // const [cardOrderIds, setCardOrderIds] = useState(column.cardOrderIds)
   const [count, setCount] = useState(0)
 
-  useEffect(() => {
-    console.log('count', count)
-    console.log('boardData', boardData)
-    console.log('columnData', columnData)
-    console.log('cardOrderIds', cardOrderIds)
-    // const convertId = CardConvertId(columnsData.lastColumnCardId)
-    // columnData.cardOrderIds = cardOrderIds
-    // columnData.cards = dataCards
-    // columnData.cardLastId = convertId
-    // columnsData.lastColumnCardId = convertId
-    // setColumnData(columnData)
-    // setColumnsData(columnsData)
-}, [ cardOrderIds, columnData, columnsData, boardData, count, dataCards])
-
+  
+  // useEffect(() => {
+  //   console.log(columnData, '- Has changed')
+  //   // setOrderedCards(mapOrder(columnData?.cards, columnData?.cardOrderIds, '_id'))
+  //   // setColumnData(column)
+  // }, [ columnData])
   const handleOpenTask = () => {
     setCount(count + 1)
     setOpenNewTask(true)
@@ -89,44 +82,46 @@ function Column({ cards, column, columns, board, index }) {
 
   function handleSaveNewName() {
 
-    const convertId = CardConvertId(boardData.lastColumnCardId)
-    console.log('handleNewCard column: ', columnData )
+    // const convertId = CardConvertId(boardData.lastColumnCardId)
+    // console.log('handleNewCard column: ', columnsData )
 
-
-    if(cardOrderIds.indexOf(convertId) === -1) {
-      const arrNew = {
-        _id: convertId,
-        boardId: 'board-id-01',
-        columnId: columnData?.cards[0].columnId,
-        childrens: [],
-        status: 'task_grey',
-        title: inputNewTask,
-        description: null,
-        cover: null,
-        memberIds: [],
-        comments: [],
-        attachments: []
-      }
-      setDataCards( (dataCards) => [...dataCards, arrNew])
-      setCardOrderIds( (cardOrderIds) => [...cardOrderIds, convertId])
-      columnData.cardOrderIds = cardOrderIds
-      columnData.cards = dataCards
-      columnData.cardLastId = convertId
-      boardData.lastColumnCardId = convertId
-      setColumnData(columnData)
-      setBoardData(boardData)
-
-    }
+    // if(cardOrderIds.indexOf(convertId) === -1) {
+    //   const arrNew = {
+    //     _id: convertId,
+    //     boardId: 'board-id-01',
+    //     columnId: columnData?.cards[0].columnId,
+    //     childrens: [],
+    //     status: 'task_grey',
+    //     title: inputNewTask,
+    //     description: null,
+    //     cover: null,
+    //     memberIds: [],
+    //     comments: [],
+    //     attachments: []
+    //   }
+    //   setDataCards( (dataCards) => [...dataCards, arrNew])
+    //   setCardOrderIds( (cardOrderIds) => [...cardOrderIds, convertId])
+    //   columnData.cardOrderIds = cardOrderIds
+    //   columnData.cards = dataCards
+    //   columnData.cardLastId = convertId
+    //   boardData.lastColumnCardId = convertId
+    //   setColumnData(columnData)
+    //   setBoardData(boardData)
+      
+    //   columnsData[index] = columnData
+    //   setColumnsData(columnsData)
+    //   setOrderedColumns(columnsData)
+    // }
     setInputNewTask('')
     setOpenNewTask(false)
 
   }
-
+  
   const open = Boolean(anchorEl)
   const handleClick = (event) => { setAnchorEl(event.currentTarget) }
   const handleClose = () => { setAnchorEl(null) }
 
-  const orderedCards = mapOrder(columnData?.cards, columnData?.cardOrderIds, '_id')
+  const orderedCards = mapOrder(column?.cards, column?.cardOrderIds, '_id')
 
   const CardConvertId = (id) => {
     const arrData = id.split('-')
@@ -135,183 +130,179 @@ function Column({ cards, column, columns, board, index }) {
     return dataConvert
   }
 
-  const newTaskData = (data, newValue) => {
-    setDataCards( (data) => [...data, newValue])
-  }
-
  
 
   return (
-    // <div ref={setNodeRef} style={dndKitColumnStyle} {...attributes} >
-    <Box
-      {...listeners}
-      sx={{
-        minWidth: '300px',
-        minHeight: '700px',
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
-        ml: '3px',
-        borderRadius: '6px',
-        height: 'fit-content',
-        overflow: 'auto',
-        maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
-      }}>
-      {/* Box column Header */}
-      <Box sx={{
-        // width: '244px',
-        m: '25px 0',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+    <div ref={setNodeRef} style={dndKitColumnStyle} {...attributes} >
+      <Box
+        {...listeners}
+        sx={{
+          minWidth: '300px',
+          minHeight: '700px',
+          bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#333643' : '#ebecf0'),
+          ml: '3px',
+          borderRadius: '6px',
+          height: 'fit-content',
+          overflow: 'auto',
+          maxHeight: (theme) => `calc(${theme.trello.boardContentHeight} - ${theme.spacing(5)})`
+        }}>
+        {/* Box column Header */}
         <Box sx={{
-          // width: '180px',
-          minHeight: '140px',
-          p: 2,
-          borderRadius: '8px',
-          backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#dbdbdb')
-          // m: '10px 10%',
-          // p: '15px 10px'
+          // width: '244px',
+          m: '25px 0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
           <Box sx={{
-            p: '10px 0'
-          }}>{columnData.title} {count}</Box>
-          <ListCardsHeader cards={orderedCards} />
+            // width: '180px',
+            minHeight: '140px',
+            p: 2,
+            borderRadius: '8px',
+            backgroundColor: (theme) => (theme.palette.mode === 'dark' ? '#6a6f89' : '#dbdbdb')
+            // m: '10px 10%',
+            // p: '15px 10px'
+          }}>
+            <Box sx={{
+              p: '10px 0'
+            }}>{columnData.title} {count}</Box>
+            <ListCardsHeader cards={orderedCards} />
+          </Box>
         </Box>
-      </Box>
 
-      <Box sx={{
-        height: (theme) => theme.trello.columnHeaderHeight,
-        mb: '30px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottom: '2px solid #ddd'
-      }}>
-        <Typography variant="h6" sx={{
-          fontSize: '21px',
-          fontWeight: 'bold',
-          cursor: 'pointer',
-          p: '10px 0',
-          textTransform: 'uppercase'
+        <Box sx={{
+          height: (theme) => theme.trello.columnHeaderHeight,
+          mb: '30px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderBottom: '2px solid #ddd'
         }}>
-          {columnData?.title}
-        </Typography>
-        {/* <Box>
-          <Tooltip title="More Option">
-            <ExpandMoreIcon
-              sx={{ color: 'text.primary', cursor: 'pointer' }}
-              id="basic-column-dropdown"
-              aria-controls={open ? 'basic-menu-column-dropdown' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              onClick={handleClick}
-            />
+          <Typography variant="h6" sx={{
+            fontSize: '21px',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            p: '10px 0',
+            textTransform: 'uppercase'
+          }}>
+            {columnData?.title}
+          </Typography>
+          {/* <Box>
+            <Tooltip title="More Option">
+              <ExpandMoreIcon
+                sx={{ color: 'text.primary', cursor: 'pointer' }}
+                id="basic-column-dropdown"
+                aria-controls={open ? 'basic-menu-column-dropdown' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              />
+            </Tooltip>
+            <Menu
+              id="basic-menu-column-dropdown"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-column-dropdown'
+              }}
+            >
+              <MenuItem>
+                <ListItemIcon><AddCardIcon fontSize="small" /></ListItemIcon>
+                <ListItemText>Add new card </ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon><ContentCut fontSize="small" /></ListItemIcon>
+                <ListItemText>Cut</ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon><ContentCopy fontSize="small" /></ListItemIcon>
+                <ListItemText>Copy</ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon><ContentPaste fontSize="small" /></ListItemIcon>
+                <ListItemText>Paste</ListItemText>
+              </MenuItem>
+              <Divider />
+              <MenuItem>
+                <ListItemIcon><DeleteForeverIcon fontSize="small" /></ListItemIcon>
+                <ListItemText>Remove this column</ListItemText>
+              </MenuItem>
+              <MenuItem>
+                <ListItemIcon><Cloud fontSize="small" /></ListItemIcon>
+                <ListItemText>Archive this column</ListItemText>
+              </MenuItem>
+            </Menu>
+          </Box> */}
+        </Box>
+
+        <ListCards columnIndex={index} cards={orderedCards} />
+
+        {/* Box column Footer */}
+        <Box sx={{
+          height: (theme) => theme.trello.columnFooterHeight,
+          p: 2,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Button onClick={handleOpenTask} startIcon={<AddCardIcon />}>Add new card</Button>
+          <Tooltip title="Drap to move">
+            <DragHandleIcon sx={{ cursor: 'pointer' }} />
           </Tooltip>
-          <Menu
-            id="basic-menu-column-dropdown"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-column-dropdown'
+        </Box>
+        <Box>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={openNewTask}
+            onClose={handleCloseNewTask}
+            closeAfterTransition
+            slots={{ backdrop: Backdrop }}
+            slotProps={{
+              backdrop: {
+                timeout: 500
+              }
             }}
           >
-            <MenuItem>
-              <ListItemIcon><AddCardIcon fontSize="small" /></ListItemIcon>
-              <ListItemText>Add new card </ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon><ContentCut fontSize="small" /></ListItemIcon>
-              <ListItemText>Cut</ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon><ContentCopy fontSize="small" /></ListItemIcon>
-              <ListItemText>Copy</ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon><ContentPaste fontSize="small" /></ListItemIcon>
-              <ListItemText>Paste</ListItemText>
-            </MenuItem>
-            <Divider />
-            <MenuItem>
-              <ListItemIcon><DeleteForeverIcon fontSize="small" /></ListItemIcon>
-              <ListItemText>Remove this column</ListItemText>
-            </MenuItem>
-            <MenuItem>
-              <ListItemIcon><Cloud fontSize="small" /></ListItemIcon>
-              <ListItemText>Archive this column</ListItemText>
-            </MenuItem>
-          </Menu>
-        </Box> */}
-      </Box>
-
-      <ListCards cards={orderedCards} />
-
-      {/* Box column Footer */}
-      <Box sx={{
-        height: (theme) => theme.trello.columnFooterHeight,
-        p: 2,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        <Button onClick={handleOpenTask} startIcon={<AddCardIcon />}>Add new card</Button>
-        <Tooltip title="Drap to move">
-          <DragHandleIcon sx={{ cursor: 'pointer' }} />
-        </Tooltip>
-      </Box>
-      <Box>
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          open={openNewTask}
-          onClose={handleCloseNewTask}
-          closeAfterTransition
-          slots={{ backdrop: Backdrop }}
-          slotProps={{
-            backdrop: {
-              timeout: 500
-            }
-          }}
-        >
-          <Fade in={openNewTask}>
-            {/* <Box sx={style}> */}
-            <Box sx={style2}>
-              <Typography
-                id="modal-modal-title"
-                variant="h6"
-                component="h2"
-              >
-                New Task
-              </Typography>
-              <Box sx={{
-                display: 'grid',
-                m: '20px 0',
-                width: '100%'
-              }}>
-                {/* <input ref={inputEditTask} type="text" /> */}
-                {/* <Textarea placeholder="Type anything…" />; */}
-                <TextField
-                  id="outlined-multiline-static-new-task"
-                  label="Type text here"
-                  multiline
-                  rows={4}
-                  onChange={(v) => setInputNewTask(v.target.value) }
-                  defaultValue={inputNewTask}
-                />
+            <Fade in={openNewTask}>
+              {/* <Box sx={style}> */}
+              <Box sx={style2}>
+                <Typography
+                  id="modal-modal-title"
+                  variant="h6"
+                  component="h2"
+                >
+                  New Task
+                </Typography>
+                <Box sx={{
+                  display: 'grid',
+                  m: '20px 0',
+                  width: '100%'
+                }}>
+                  {/* <input ref={inputEditTask} type="text" /> */}
+                  {/* <Textarea placeholder="Type anything…" />; */}
+                  <TextField
+                    id="outlined-multiline-static-new-task"
+                    label="Type text here"
+                    multiline
+                    rows={4}
+                    onChange={(v) => setInputNewTask(v.target.value) }
+                    defaultValue={inputNewTask}
+                  />
+                </Box>
+                <div className="button-modal">
+                  <Button variant="contained" onClick={handleSaveNewName}>
+                    Save Task
+                  </Button>
+                </div>
               </Box>
-              <div className="button-modal">
-                <Button variant="contained" onClick={handleSaveNewName}>
-                  Save Task
-                </Button>
-              </div>
-            </Box>
-            {/* </Box> */}
-          </Fade>
-        </Modal>
+              {/* </Box> */}
+            </Fade>
+          </Modal>
+        </Box>
       </Box>
-    </Box>
-    // </div>
+    </div>
 
   )
 }

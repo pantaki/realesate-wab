@@ -120,7 +120,7 @@ function BoardContent({ board, users, documents }) {
   }
 
   const handleDragStart = (event) => {
-    console.log( 'handlDragStart: ', event)
+    // console.log( 'handlDragStart: ', event)
     setActiveDragItemId(event?.active?.id)
     setActiveDragItemType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
     setActiveDragItemTypeData(event?.active?.data?.current)
@@ -192,15 +192,15 @@ function BoardContent({ board, users, documents }) {
       const overCard = findCardByChildrenId(over.id)
 
 
-      console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
-      console.log('xu ly keo tha card end active: ', active.id)
-      console.log('xu ly keo tha card end over: ', over)
-      console.log('xu ly keo tha card end activeCard: ', activeCard)
-      console.log('xu ly keo tha card end overCard: ', overCard)
+      // console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
+      // console.log('xu ly keo tha card end active: ', active.id)
+      // console.log('xu ly keo tha card end over: ', over)
+      // console.log('xu ly keo tha card end activeCard: ', activeCard)
+      // console.log('xu ly keo tha card end overCard: ', overCard)
 
       if (!activeColumn || !overColumn) return
       if (oldColumnWhenDraggingCard._id !== overColumn._id) {
-        console.log('hanh dong keo tha card giua 2 column khac nhau')
+        // console.log('hanh dong keo tha card giua 2 column khac nhau')
         // hanh dong keo tha card giua 2 column khac nhau
         moveCardBetweenDifferentColumns(
           overColumn,
@@ -212,7 +212,7 @@ function BoardContent({ board, users, documents }) {
           activeDraggingCardData
         )
       } else {
-        console.log('hanh dong keo tha card trong cung 1 column')
+        // console.log('hanh dong keo tha card trong cung 1 column')
 
         // hanh dong keo tha card trong cung 1 column
 
@@ -245,7 +245,7 @@ function BoardContent({ board, users, documents }) {
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
 
       if (active.id !== over.id) {
-        console.log('column drap')
+        // console.log('column drap')
         // get position old
         const oldColumnIndex = orderedColumns.findIndex(c => c._id === active.id)
         // get position new
@@ -297,7 +297,7 @@ function BoardContent({ board, users, documents }) {
           <Box sx={{
             display: 'flex'
           }}>
-            <ListColumns columns={orderedColumns} board={board} />
+            <ListColumns setOrderedColumns={setOrderedColumns} columns={orderedColumns} board={board} />
             <DragOverlay dropAnimation={customDropAnimation}>
               {!activeDragItemType && null}
               {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}

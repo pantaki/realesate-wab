@@ -2,7 +2,7 @@ import Box from '@mui/material/Box'
 import CardTask from './Card/CardTask'
 import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
-function ListCards({ cards }) {
+function ListCards({ columnIndex, cards }) {
   // function handleCollapse(id) {
   //   setItems((items) =>
   //     setProperty(items, id, 'collapsed', (value) => {
@@ -35,7 +35,7 @@ function ListCards({ cards }) {
           '&::-webkit-scrollbar-thumb' : { backgroundColor: '#ced0da' },
           '&::-webkit-scrollbar-thumb:hover' : { backgroundColor: '#bfc2cf' }
         }}>
-        {cards?.map((card, index) => <CardTask key={card._id} cards={cards} card={card} index={index} />)}
+        {cards?.map((card, index) => <CardTask key={card._id} card={card} index={index} />)}
       </Box>
     </SortableContext>
   )
