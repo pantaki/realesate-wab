@@ -86,10 +86,10 @@ function CardTask({ card, index }) {
   const [userChecked1, setUserChecked1] = useState(false)
   const [openNoti, setOpenNoti] = React.useState(false)
 
-  
   useEffect(() => {
 
   }, [dataCart])
+
   const handleNotiClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
@@ -109,7 +109,8 @@ function CardTask({ card, index }) {
 
   const handleOpenTask = () => {
  
-    if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') setOpenTask(true)
+    // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') 
+    setOpenTask(true)
     setSelectedValue(dataCart.status)
   }
   const handleCloseTask = () => setOpenTask(false)
@@ -339,152 +340,152 @@ function CardTask({ card, index }) {
                 borderRadius: '6px',
                 p: 1
               }}>
-                {(dataCart.status === 'task_waiting' || dataCart.status === 'task_note') && (
+               
+                <Box sx={{
+                  display: 'flex',
+                  justifyContent: 'space-around',
+                  // m: 1,
+
+                }}>
+
                   <Box sx={{
-                    display: 'flex',
-                    justifyContent: 'space-around',
-                    // m: 1,
-
+                    textAlign: 'center',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    width: '12%'
                   }}>
-
                     <Box sx={{
-                      textAlign: 'center',
-                      fontSize: '12px',
-                      textTransform: 'uppercase',
-                      width: '12%'
-                    }}>
-                      <Box sx={{
-                        width: '30px',
-                        height: '30px',
-                        margin: '5px auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#ababab'
-                      }}></Box>
-                      <Radio
-                        {...selectedValue === 'task_grey'
-                          ? 'disabled' : ''}
-                        {...controlProps('task_grey')}
-                        sx={{
-                          p: '9px 0',
+                      width: '30px',
+                      height: '30px',
+                      margin: '5px auto',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#ababab'
+                    }}></Box>
+                    <Radio
+                      {...selectedValue === 'task_grey'
+                        ? 'disabled' : ''}
+                      {...controlProps('task_grey')}
+                      sx={{
+                        p: '9px 0',
+                        color: '#ababab',
+                        '&.Mui-checked': {
                           color: '#ababab',
-                          '&.Mui-checked': {
-                            color: '#ababab',
-                          },
-                        }}
-                      />  Not Done
-                    </Box>
-                    <Box sx={{
-                      textAlign: 'center',
-                      fontSize: '12px',
-                      textTransform: 'uppercase',
-                      width: '12%'
-                    }}>
-                      <Box sx={{
-                        width: '30px',
-                        height: '30px',
-                        margin: '5px auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#01b10a'
-                      }}></Box>
-                      <Radio
-                        {...selectedValue === 'task_done'
-                          ? 'disabled' : ''}
-                        {...controlProps('task_done')}
-                        sx={{
-                          p: '9px 0',
-                          color: '#01b10a',
-                          '&.Mui-checked': {
-                            color: '#01b10a',
-                          },
-                        }}
-                      />
-                    </Box>
-                    <Box sx={{
-                      textAlign: 'center',
-                      fontSize: '12px',
-                      textTransform: 'uppercase',
-                      width: '12%'
-                    }}>
-                      <Box sx={{
-                        width: '30px',
-                        height: '30px',
-                        margin: '5px auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#01b10a'
-                      }}>x</Box>
-                      <Radio
-                        disabled
-                        {...controlProps('task_donena')}
-                        sx={{
-                          p: '9px 0',
-                          color: '#01b10a',
-                          '&.Mui-checked': {
-                            color: '#01b10a',
-                          },
-                        }}
-                      />  Done NA
-                    </Box>
-                    <Box sx={{
-                      textAlign: 'center',
-                      fontSize: '12px',
-                      textTransform: 'uppercase',
-                      width: '12%'
-                    }}>
-                      <Box sx={{
-                        width: '30px',
-                        height: '30px',
-                        margin: '5px auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#f5c916'
-                      }}></Box>
-                      <Radio
-                        {...controlProps('task_waiting')}
-                        sx={{
-                          p: '9px 0',
-                          color: '#f5c916',
-                          '&.Mui-checked': {
-                            color: '#f5c916',
-                          },
-                        }}
-                      />  Wait for
-                    </Box>
-                    <Box sx={{
-                      textAlign: 'center',
-                      fontSize: '12px',
-                      textTransform: 'uppercase',
-                      width: '12%'
-                    }}>
-                      <Box sx={{
-                        width: '30px',
-                        height: '30px',
-                        margin: '5px auto',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: '#d10101'
-                      }}></Box>
-                      <Radio
-                        name="radio-buttons-status"
-                        {...controlProps('task_note')}
-                        sx={{
-                          p: '9px 0',
-                          color: '#d10101',
-                          '&.Mui-checked': {
-                            color: '#d10101',
-                          },
-                        }}
-                      />  Note for
-                    </Box>
+                        },
+                      }}
+                    />  Not Done
                   </Box>
-                )}
+                  <Box sx={{
+                    textAlign: 'center',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    width: '12%'
+                  }}>
+                    <Box sx={{
+                      width: '30px',
+                      height: '30px',
+                      margin: '5px auto',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#01b10a'
+                    }}></Box>
+                    <Radio
+                      {...selectedValue === 'task_done'
+                        ? 'disabled' : ''}
+                      {...controlProps('task_done')}
+                      sx={{
+                        p: '9px 0',
+                        color: '#01b10a',
+                        '&.Mui-checked': {
+                          color: '#01b10a',
+                        },
+                      }}
+                    />
+                  </Box>
+                  <Box sx={{
+                    textAlign: 'center',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    width: '12%'
+                  }}>
+                    <Box sx={{
+                      width: '30px',
+                      height: '30px',
+                      margin: '5px auto',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#01b10a'
+                    }}>x</Box>
+                    <Radio
+                      disabled
+                      {...controlProps('task_donena')}
+                      sx={{
+                        p: '9px 0',
+                        color: '#01b10a',
+                        '&.Mui-checked': {
+                          color: '#01b10a',
+                        },
+                      }}
+                    />  Done NA
+                  </Box>
+                  <Box sx={{
+                    textAlign: 'center',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    width: '12%'
+                  }}>
+                    <Box sx={{
+                      width: '30px',
+                      height: '30px',
+                      margin: '5px auto',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#f5c916'
+                    }}></Box>
+                    <Radio
+                      {...controlProps('task_waiting')}
+                      sx={{
+                        p: '9px 0',
+                        color: '#f5c916',
+                        '&.Mui-checked': {
+                          color: '#f5c916',
+                        },
+                      }}
+                    />  Wait for
+                  </Box>
+                  <Box sx={{
+                    textAlign: 'center',
+                    fontSize: '12px',
+                    textTransform: 'uppercase',
+                    width: '12%'
+                  }}>
+                    <Box sx={{
+                      width: '30px',
+                      height: '30px',
+                      margin: '5px auto',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      backgroundColor: '#d10101'
+                    }}></Box>
+                    <Radio
+                      name="radio-buttons-status"
+                      {...controlProps('task_note')}
+                      sx={{
+                        p: '9px 0',
+                        color: '#d10101',
+                        '&.Mui-checked': {
+                          color: '#d10101',
+                        },
+                      }}
+                    />  Note for
+                  </Box>
+                </Box>
+               
               </Box>
             </Box>
 
