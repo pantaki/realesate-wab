@@ -91,13 +91,19 @@ function CardTask({ card, index }) {
 
 
   useEffect(() => {
-
+    // dataCart.comments = taskComment
+    // setDataCart(dataCart)
+    
   }, [dataCart])
+
+  function handleChangeAddNote(event) {
+    setInputAddNote(event.target.value)
+    
+
+  }
 
   function handleChangeFile(event) {
     setFile((file) => [...file, event.target.files[0]])
-    dataCart.attachments = file
-    setDataCart(dataCart)
   }
 
   const handleNotiClose = (event, reason) => {
@@ -119,7 +125,9 @@ function CardTask({ card, index }) {
 
   const handleOpenTask = () => {
  
-    // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note') 
+    // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note')
+    dataCart.comments = taskComment
+    setDataCart(dataCart)
     setOpenTask(true)
     setSelectedValue(dataCart.status)
   }
@@ -141,9 +149,7 @@ function CardTask({ card, index }) {
 
   function handleSaveTask() {
     let convertId = 0
-    console.log('dataCart.commentsLastId: ', dataCart)
-    dataCart.status = selectedValue
-    if (inputEditTask !== dataCart.title) dataCart.title = inputEditTask
+    
     if(dataCart.commentsLastId)  {
       convertId = CardConvertId(dataCart.commentsLastId)
     } else {
@@ -159,24 +165,30 @@ function CardTask({ card, index }) {
         date: 'Aug. 25 ,2023 20:30 Am'
       }
       if(dataCart.commentsLastId !== convertId || dataCart.commentsLastId === '') dataCart.commentsLastId = convertId
-      
+
       setTaskComment( (taskComment) => [...taskComment, commentNew])
-      dataCart.comments = taskComment
-      
-      
+
+
     }
+
+    dataCart.status = selectedValue
+    if (inputEditTask !== dataCart.title) dataCart.title = inputEditTask
+
+    dataCart.comments = taskComment
+    dataCart.attachments = file
+
     setOpenNoti(true)
-    setDataCart(dataCart)
     setInputEditTask(dataCart.title)
-    
+
     // setOrderedCards(dataCarts[index] = dataCart)
     // cards[index] = dataCart
     // column.cards = cards
     // columns[columnIndex] = column
     
     setInputAddNote('')
-    console.log('dataCart.commentsLastId after: ', dataCart)
+    
     setOpenTask(false)
+    setDataCart(dataCart)
   }
 
   const CardConvertId = (id) => {
@@ -299,7 +311,7 @@ function CardTask({ card, index }) {
               >
                 <Box sx={{
                   display: 'grid',
-                  m: '20px 0',
+                  m: '10px 0',
                   width: '100%'
                 }}>
                   <Typography
@@ -555,7 +567,7 @@ function CardTask({ card, index }) {
               }}>
 
                 <Box sx={{
-                  maxHeight: '200px',
+                  maxHeight: '150px',
                   overflow: 'auto'
                 }}>
                   {/* List Comment */}
@@ -663,7 +675,7 @@ function CardTask({ card, index }) {
 
             <Box sx={{
               display: 'grid',
-              m: '20px 0',
+              m: '10px 0',
               width: '100%'
             }}>
               {/* <input ref={inputEditTask} type="text" /> */}
@@ -673,7 +685,7 @@ function CardTask({ card, index }) {
                 label="Add Note"
                 multiline
                 rows={4}
-                onChange={(v) => setInputAddNote(v.target.value) }
+                onChange={handleChangeAddNote }
                 defaultValue={inputAddNote}
               />
             </Box>
