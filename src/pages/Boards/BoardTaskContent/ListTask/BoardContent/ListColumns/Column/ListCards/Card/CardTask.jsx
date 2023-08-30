@@ -31,6 +31,8 @@ import * as React from 'react'
 import Stack from '@mui/material/Stack'
 import Snackbar from '@mui/material/Snackbar'
 import MuiAlert from '@mui/material/Alert'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+// import { styled } from '@mui/joy'
 
 const style = {
   position: 'absolute',
@@ -197,10 +199,8 @@ function CardTask({ card, index }) {
     name: 'color-radio-button-status',
     inputProps: { 'aria-label': item }
   })
-// useEffect(() => {
-//     // setOrderedColumns(columns)
-    
-//   }, [dataCarts, dataCart, selectedValue, inputEditTask])
+
+
   return (
     // <div ref={setNodeRef} style={dndKitCardStyle} {...attributes} >
     <Box>
@@ -486,6 +486,43 @@ function CardTask({ card, index }) {
                   </Box>
                 </Box>
                
+              </Box>
+            </Box>
+
+            {/* Attachment */}
+            <Box sx={{mt: 2}}>
+              {/* <Button size="small" startIcon={<CommentIcon />} > */}
+              <Box>
+                <Typography
+                  sx={{
+                    fontSize: '15px',
+                    fontWeight: 'bold',
+                    textTransform: 'uppercase'
+                  }}
+                  variant="subtitle1" gutterBottom
+                >
+                  Task Attachment
+                </Typography>
+              </Box>
+              <Box sx={{
+                backgroundColor: '#fff',
+                p:2,
+                borderRadius: '6px'
+              }}>
+
+              
+              <TextField
+                // id="outlined-multiline-static-file"
+                color="success"
+                // label="Choose file"
+                type="file"
+                variant="filled"
+                // endIcon={<CloudUploadIcon />}
+                // rows={4}
+                // onChange={(v) => setInputAddNote(v.target.value) }
+                // defaultValue={inputAddNote}
+              />
+              {/* </Button> */}
               </Box>
             </Box>
 
