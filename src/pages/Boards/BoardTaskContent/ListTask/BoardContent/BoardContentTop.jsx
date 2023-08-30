@@ -110,7 +110,6 @@ function BoardContentTop({ users }) {
                               ROLE:
                             </Typography>
                             <Select
-                              small
                               disabled
                               labelId="demo-select-small-label"
                               id="demo-select-small"

@@ -56,7 +56,7 @@ const style2 = {
 }
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+})
 
 function CardTask({ card, index }) {
 
@@ -87,7 +87,9 @@ function CardTask({ card, index }) {
   const [openNoti, setOpenNoti] = React.useState(false)
 
   
+  useEffect(() => {
 
+  }, [dataCart])
   const handleNotiClose = (event, reason) => {
     if (reason === 'clickaway') {
       return
