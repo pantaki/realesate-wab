@@ -86,11 +86,19 @@ function CardTask({ card, index }) {
   const [chilrenHiddenIcon, setChilrenHiddenIcon] = useState(<KeyboardArrowDownIcon sx={{ fill: '#919eab' }} />)
   const [userChecked, setUserChecked] = useState(false)
   const [userChecked1, setUserChecked1] = useState(false)
-  const [openNoti, setOpenNoti] = React.useState(false)
+  const [openNoti, setOpenNoti] = useState(false)
+  const [file, setFile] = useState(dataCart?.attachments)
+
 
   useEffect(() => {
 
   }, [dataCart])
+
+  function handleChangeFile(event) {
+    setFile((file) => [...file, event.target.files[0]])
+    dataCart.attachments = file
+    setDataCart(dataCart)
+  }
 
   const handleNotiClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -519,7 +527,7 @@ function CardTask({ card, index }) {
                 variant="filled"
                 // endIcon={<CloudUploadIcon />}
                 // rows={4}
-                // onChange={(v) => setInputAddNote(v.target.value) }
+                onChange={handleChangeFile}
                 // defaultValue={inputAddNote}
               />
               {/* </Button> */}
