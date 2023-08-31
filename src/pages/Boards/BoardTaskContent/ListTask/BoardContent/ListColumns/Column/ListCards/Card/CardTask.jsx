@@ -36,6 +36,8 @@ import Tab from '@mui/material/Tab'
 import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
+import Zoom from 'react-medium-image-zoom'
+import 'react-medium-image-zoom/dist/styles.css'
 
 const style2 = {
   position: 'absolute',
@@ -590,7 +592,7 @@ function CardTask({ card, index }) {
                         return (<Box sx={{
                           maxHeight: '90px', ml: '5px'
                         }} key={index}>
-                          <img style={{height: '90px'}} src={fileValue[0]} alt="" />
+                          <Zoom><img style={{height: '90px'}} src={fileValue[0]} alt="" /></Zoom>
                         </Box>
                         )
                       })}

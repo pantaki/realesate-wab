@@ -24,6 +24,7 @@
     "react-animate-height": "^3.2.2",
     "react-collapsed": "^4.0.4",
     "react-dom": "^18.2.0",
+    "react-medium-image-zoom": "^5.1.8",
     "react-responsive": "^9.0.2"
   },
   "devDependencies": {
