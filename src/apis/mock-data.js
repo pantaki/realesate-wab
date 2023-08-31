@@ -856,7 +856,8 @@ export const mockData = {
                 date: 'Aug. 24 ,2023 8:30 Am'
               }
             ],
-            attachments: ['test attachment 01']
+            attachments: []
+
           },
           { _id: 'card-id-02', boardId: 'board-id-01', columnId: 'column-id-01', cardChildrenOrderIds: [], childrens: [], status: 'task_done', title: "CLEIA During call, get buyer's contact info", description: null, cover: null, memberIds: [], comments: [], attachments: [] },
           { _id: 'card-id-03', boardId: 'board-id-01', columnId: 'column-id-01', cardChildrenOrderIds: [], childrens: [], status: 'task_note', title: "ADMIN Add buyer's contact info to KW Command", description: null, cover: null, memberIds: [], comments: [], attachments: [] },

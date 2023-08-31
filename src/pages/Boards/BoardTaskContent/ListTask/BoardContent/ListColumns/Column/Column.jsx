@@ -133,7 +133,7 @@ function Column({ column, index }) {
  
 
   return (
-    <div ref={setNodeRef} style={dndKitColumnStyle} {...attributes} >
+    //<div ref={setNodeRef} style={dndKitColumnStyle} {...attributes} >
       <Box
         {...listeners}
         sx={{
@@ -302,7 +302,7 @@ function Column({ column, index }) {
           </Modal>
         </Box>
       </Box>
-    </div>
+   //</div>
 
   )
 }

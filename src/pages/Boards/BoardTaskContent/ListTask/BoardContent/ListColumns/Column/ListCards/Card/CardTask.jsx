@@ -32,19 +32,11 @@ import Stack from '@mui/material/Stack'
 import Snackbar from '@mui/material/Snackbar'
 import MuiAlert from '@mui/material/Alert'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload'
-// import { styled } from '@mui/joy'
+import Tab from '@mui/material/Tab'
+import TabContext from '@mui/lab/TabContext'
+import TabList from '@mui/lab/TabList'
+import TabPanel from '@mui/lab/TabPanel'
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  p: 4
-}
 const style2 = {
   position: 'absolute',
   top: '50%',
@@ -54,7 +46,7 @@ const style2 = {
   bgcolor: '#ddd',
   border: '2px solid #000',
   boxShadow: 24,
-  p: '15px 20px'
+  p: '5px 20px'
 }
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -88,22 +80,70 @@ function CardTask({ card, index }) {
   const [userChecked1, setUserChecked1] = useState(false)
   const [openNoti, setOpenNoti] = useState(false)
   const [file, setFile] = useState(dataCart?.attachments)
+  const [imageFiles, setImageFiles] = useState([])
+  const [images, setImages] = useState([])
+  const [valueTabFile, setValueTabFile] = useState('1')
 
+  const handleChangeTabFile = (event, newValue) => {
+    setValueTabFile(newValue)
+  }
 
   useEffect(() => {
-    // dataCart.comments = taskComment
-    // setDataCart(dataCart)
-    
+
   }, [dataCart])
+
+  useEffect(() => {
+    const images = [], fileReaders = []
+    let isCancel = false
+    if (imageFiles.length) {
+      imageFiles.forEach((file) => {
+        const fileReader = new FileReader()
+        fileReaders.push(fileReader)
+        fileReader.onload = (e) => {
+          const { result } = e.target
+          if (result) {
+            images.push(result)
+          }
+          if (images.length === imageFiles.length && !isCancel) {
+            setImages(images)
+            setFile((file) => [...file, images])
+          }
+        }
+        fileReader.readAsDataURL(file)
+      })
+    }
+    return () => {
+      isCancel = true
+      fileReaders.forEach(fileReader => {
+        if (fileReader.readyState === 1) {
+          fileReader.abort()
+        }
+      })
+    }
+  }, [imageFiles])
 
   function handleChangeAddNote(event) {
     setInputAddNote(event.target.value)
-    
 
   }
 
-  function handleChangeFile(event) {
-    setFile((file) => [...file, event.target.files[0]])
+  function handleChangeFile(e) {
+    const { files } = e.target
+    const validImageFiles = []
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i]
+      if (file.type.match(imageTypeRegex)) {
+        validImageFiles.push(file)
+      }
+    }
+    if (validImageFiles.length) {
+      setImageFiles(validImageFiles)
+      
+
+      return
+    }
+    alert('Selected images are not of valid type!')
+    // setFile((file) => [...file, event.target.files[0]])
   }
 
   const handleNotiClose = (event, reason) => {
@@ -124,12 +164,15 @@ function CardTask({ card, index }) {
 
 
   const handleOpenTask = () => {
+    console.log('images', images)
+    console.log('file', file)
  
     // if (dataCart.status === 'task_waiting' || dataCart.status === 'task_note')
-    dataCart.comments = taskComment
-    setDataCart(dataCart)
     setOpenTask(true)
     setSelectedValue(dataCart.status)
+    dataCart.comments = taskComment
+
+    setDataCart(dataCart)
   }
   const handleCloseTask = () => setOpenTask(false)
 
@@ -176,7 +219,7 @@ function CardTask({ card, index }) {
 
     dataCart.comments = taskComment
     dataCart.attachments = file
-
+    setValueTabFile('1')
     setOpenNoti(true)
     setInputEditTask(dataCart.title)
 
@@ -220,6 +263,7 @@ function CardTask({ card, index }) {
     inputProps: { 'aria-label': item }
   })
 
+  const imageTypeRegex = /image\/(png|jpg|jpeg)/gm
 
   return (
     // <div ref={setNodeRef} style={dndKitCardStyle} {...attributes} >
@@ -510,8 +554,7 @@ function CardTask({ card, index }) {
             </Box>
 
             {/* Attachment */}
-            <Box sx={{mt: 2}}>
-              {/* <Button size="small" startIcon={<CommentIcon />} > */}
+            <Box sx={{mt: 1}}>
               <Box>
                 <Typography
                   sx={{
@@ -526,28 +569,52 @@ function CardTask({ card, index }) {
               </Box>
               <Box sx={{
                 backgroundColor: '#fff',
-                p:2,
+                p:1,
                 borderRadius: '6px'
               }}>
+                <TabContext value={valueTabFile}>
+                  <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                    <TabList onChange={handleChangeTabFile} aria-label="lab API tabs example">
+                      <Tab label="List File" value="1" />
+                      <Tab label="Upload File" value="2" />
+                    </TabList>
+                  </Box>
+                  <TabPanel value="1" sx={{p: 1}}>
 
-              
-              <TextField
-                // id="outlined-multiline-static-file"
-                color="success"
-                // label="Choose file"
-                type="file"
-                variant="filled"
-                // endIcon={<CloudUploadIcon />}
-                // rows={4}
-                onChange={handleChangeFile}
-                // defaultValue={inputAddNote}
-              />
-              {/* </Button> */}
+                    <Box sx={{
+                      display: '-webkit-box',
+                      justifyContent: 'space-evenly',
+                      overflow: 'auto'
+                    }}>
+                      {file?.map((fileValue, index) => {
+                        return (<Box sx={{
+                          maxHeight: '90px', ml: '5px'
+                        }} key={index}>
+                          <img style={{height: '90px'}} src={fileValue[0]} alt="" />
+                        </Box>
+                        )
+                      })}
+                    </Box>
+                  </TabPanel>
+                  <TabPanel value="2" sx={{p: 1}}>
+                    <Box>
+
+                      <TextField
+                        color="success"
+                        type="file"
+                        variant="filled"
+                        onChange={handleChangeFile}
+                      />
+
+                    </Box>
+                  </TabPanel>
+
+                </TabContext>
               </Box>
             </Box>
 
             {/* box Task Notes */}
-            <Box sx={{mt: 2}}>
+            <Box sx={{mt: 1}}>
               <Box>
                 <Typography
                   sx={{
@@ -567,7 +634,7 @@ function CardTask({ card, index }) {
               }}>
 
                 <Box sx={{
-                  maxHeight: '150px',
+                  maxHeight: '110px',
                   overflow: 'auto'
                 }}>
                   {/* List Comment */}
