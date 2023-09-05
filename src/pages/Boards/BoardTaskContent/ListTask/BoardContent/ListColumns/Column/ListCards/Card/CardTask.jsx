@@ -242,6 +242,7 @@ function CardTask({ card, index }) {
 
   const TaskColor = (theme) => {
     if (dataCart.status === 'task_done') return theme.taskColor.task_done
+    if (dataCart.status === 'task_done_na') return theme.taskColor.task_done_na
     if (dataCart.status === 'task_note') return theme.taskColor.task_note
     if (dataCart.status === 'task_waiting') return theme.taskColor.task_waiting
     if (dataCart.status === 'task_grey') return theme.taskColor.task_grey
@@ -408,6 +409,35 @@ function CardTask({ card, index }) {
                           },
                         }}
                       /> Done
+                    </Box>
+                    <Box sx={{
+                      textAlign: 'center',
+                      fontSize: '12px',
+                      textTransform: 'uppercase',
+                      width: '12%'
+                    }}>
+                      <Box sx={{
+                        width: '30px',
+                        height: '30px',
+                        margin: '5px auto',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: '#01b10a',
+                        color: '#fff'
+                      }}>X</Box>
+                      <Radio
+                        {...selectedValue === 'task_done_na'
+                          ? 'disabled' : ''}
+                        {...controlProps('task_done_na')}
+                        sx={{
+                          p: '9px 0',
+                          color: '#01b10a',
+                          '&.Mui-checked': {
+                            color: '#01b10a'
+                          },
+                        }}
+                      /> Done NA
                     </Box>
 
                     <Box sx={{
