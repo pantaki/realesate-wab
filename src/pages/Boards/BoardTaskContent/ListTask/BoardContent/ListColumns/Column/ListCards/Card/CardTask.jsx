@@ -37,6 +37,7 @@ import TabContext from '@mui/lab/TabContext'
 import TabList from '@mui/lab/TabList'
 import TabPanel from '@mui/lab/TabPanel'
 import Zoom from 'react-medium-image-zoom'
+import { Document, Page } from 'react-pdf'
 import 'react-medium-image-zoom/dist/styles.css'
 
 const style2 = {
@@ -135,9 +136,9 @@ function CardTask({ card, index }) {
     const validImageFiles = []
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
-      if (file.type.match(imageTypeRegex)) {
+      // if (file.type.match(imageTypeRegex)) {
         validImageFiles.push(file)
-      }
+      // }
     }
     if (validImageFiles.length) {
       setImageFiles(validImageFiles)
@@ -248,8 +249,6 @@ function CardTask({ card, index }) {
     if (dataCart.status === 'task_grey') return theme.taskColor.task_grey
   }
 
- 
-
   const CardConvertId = (id) => {
     const arrData = id.split('-')
     const idNew = parseInt(arrData[2]) + 1
@@ -295,17 +294,28 @@ function CardTask({ card, index }) {
           alignItems: 'center',
           justifyContent: 'space-around',
           transition: '0.7s',
-          '&:hover': { opacity: '0.7'}
+          position: 'relative',
+          // '&:hover': { opacity: '0.7'}
         }}>
-        <Box onClick={handleOpenTaskColor}>
+        <Box
+          sx={{
+            width: '35px',
+            height: '100%',
+            mr: 1
+          }} onClick={handleOpenTaskColor}>
           <Box sx={{
             // display: 'flex',
             backgroundColor: TaskColor,
-            // width: '30px',
-            // height: '30px',
-            mx: 1,
-            p: 2,
+            width: '30px',
+            // height: '100%',
+            // mx: 1,
+            // p: '61px 15px',
+            // borderRadius: '20px',
             transition: '0.7s',
+            height: '100%',
+            left: 0,
+            top: 0,
+            position: 'absolute',
             '&:hover': { opacity: '0.7'}
           }} ></Box>
         </Box>
@@ -519,7 +529,11 @@ function CardTask({ card, index }) {
 
         {/* {card?.cover && <CardMedia sx={{ height: 140 }} image={card?.cover} />} */}
 
-        <Box onClick={handleOpenTask}>
+        <Box
+          sx={{
+            transition: '0.7s',
+            '&:hover': { opacity: '0.7'}
+          }} onClick={handleOpenTask}>
           <CardContent sx={{ p: 1.5, '&:last-child': { p: 1.5 } }}>
             <Typography sx={{
               fontSize: '13px',
@@ -632,10 +646,20 @@ function CardTask({ card, index }) {
                         overflow: 'auto'
                       }}>
                         {file?.map((fileValue, index) => {
+                          console.log('fileValue: ' + fileValue[0])
                           return (<Box sx={{
                             maxHeight: '90px', ml: '5px'
                           }} key={index}>
                             <Zoom><img style={{height: '90px'}} src={fileValue[0]} alt="" /></Zoom>
+                            <Zoom>
+                              <Document
+                                file={{
+                                  data: fileValue[0]
+                                }}
+                              >
+                                <Page pageNumber='1' />
+                              </Document>
+                            </Zoom>
                           </Box>
                           )
                         })}
