@@ -169,7 +169,7 @@ function BoardContent({ board, users, documents }) {
   }
 
   const handleDragEnd = (event) => {
-    // console.log( 'handlDragEnd: ', event)
+    console.log( 'handlDragEnd: ', event)
 
     const { active, over } = event
 
@@ -192,11 +192,11 @@ function BoardContent({ board, users, documents }) {
       const overCard = findCardByChildrenId(over.id)
 
 
-      // console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
-      // console.log('xu ly keo tha card end active: ', active.id)
-      // console.log('xu ly keo tha card end over: ', over)
-      // console.log('xu ly keo tha card end activeCard: ', activeCard)
-      // console.log('xu ly keo tha card end overCard: ', overCard)
+      console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
+      console.log('xu ly keo tha card end active: ', active.id)
+      console.log('xu ly keo tha card end over: ', over)
+      console.log('xu ly keo tha card end activeCard: ', activeCard)
+      console.log('xu ly keo tha card end overCard: ', overCard)
 
       if (!activeColumn || !overColumn) return
       if (oldColumnWhenDraggingCard._id !== overColumn._id) {

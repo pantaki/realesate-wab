@@ -4,7 +4,7 @@ import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
 
 function CardChildrens({ ChildrentCards }) {
   return (
-    // <SortableContext items={ChildrentCards?.map(c => c._id)} strategy={verticalListSortingStrategy}>
+    <SortableContext items={ChildrentCards?.map(c => c._id)} strategy={verticalListSortingStrategy}>
       <Box sx={{
         pl: 2,
         display: 'flex',
@@ -23,7 +23,7 @@ function CardChildrens({ ChildrentCards }) {
       }}>
         {ChildrentCards?.map(ChildrentCard => <Children key={ChildrentCard._id} ChildrentCard={ChildrentCard} />)}
       </Box>
-    // </SortableContext>
+    </SortableContext>
   )
 }
 

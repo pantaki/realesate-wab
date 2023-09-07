@@ -40,6 +40,7 @@ import Zoom from 'react-medium-image-zoom'
 import { Document, Page } from 'react-pdf'
 import 'react-medium-image-zoom/dist/styles.css'
 
+ 
 const style2 = {
   position: 'absolute',
   top: '50%',
@@ -87,6 +88,7 @@ function CardTask({ card, index }) {
   const [imageFiles, setImageFiles] = useState([])
   const [images, setImages] = useState([])
   const [valueTabFile, setValueTabFile] = useState('1')
+
 
   const handleChangeTabFile = (event, newValue) => {
     setValueTabFile(newValue)
@@ -281,10 +283,11 @@ function CardTask({ card, index }) {
   const imageTypeRegex = /image\/(png|jpg|jpeg)/gm
 
   return (
-    // <div ref={setNodeRef} style={dndKitCardStyle} {...attributes} >
+    //<div ref={setNodeRef} style={dndKitCardStyle} {...attributes} >
+
     <Box>
       <Card
-        ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
+        ref={setNodeRef} style={dndKitCardStyle} {...attributes} 
         sx={{
           cursor: 'pointer',
           boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
@@ -301,9 +304,9 @@ function CardTask({ card, index }) {
           sx={{
             width: '35px',
             height: '100%',
-            mr: 1
+            // mr: 1
           }} onClick={handleOpenTaskColor}>
-          <Box sx={{
+          <Box {...listeners} sx={{
             // display: 'flex',
             backgroundColor: TaskColor,
             width: '30px',
@@ -518,7 +521,9 @@ function CardTask({ card, index }) {
             {/* </Box> */}
           </Fade>
         </Modal>
-        <Box>
+        <Box sx={{
+          pl: '20px',
+        }}>
           {dataCart?.childrens?.length > 0 &&
           <Box onClick={handleChilrenHidden}>
             {chilrenHiddenIcon}
@@ -852,8 +857,8 @@ function CardTask({ card, index }) {
         <CardChildrens ChildrentCards={orderedChildrens} />
       </Box>
     </Box>
-    //</div>
-
+   // </div>
+    
   )
 }
 
