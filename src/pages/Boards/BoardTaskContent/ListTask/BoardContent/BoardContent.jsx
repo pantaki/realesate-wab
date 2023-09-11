@@ -10,6 +10,7 @@ import BoardContentBottom from './BoardContentBottom'
 import {
   DndContext,
   PointerSensor,
+  KeyboardSensor,
   MouseSensor,
   TouchSensor,
   useSensor,
@@ -24,7 +25,8 @@ import { cloneDeep } from 'lodash'
 
 const ACTIVE_DRAG_ITEM_TYPE = {
   COLUMN: 'ACTIVE_DRAG_ITEM_TYPE_COLUMN',
-  CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD'
+  CARD: 'ACTIVE_DRAG_ITEM_TYPE_CARD',
+  // CHILDREN: 'ACTIVE_DRAG_ITEM_TYPE_CARD_CHILDREN'
 }
 
 function BoardContent({ board, users, documents }) {
@@ -36,11 +38,14 @@ function BoardContent({ board, users, documents }) {
 
   const touchSensor = useSensor(TouchSensor, { activationConstraint: { delay: 250, tolerance: 500 } })
 
+
   // const mySensors = useSensors(pointerSensor)
   const mySensors = useSensors(mouseSensor, touchSensor)
 
   const [orderedColumns, setOrderedColumns] = useState([])
   const [orderedCards, setOrderedCards] = useState([])
+  const [boardData, setBoardData] = useState(board)
+  const [offsetLeft, setOffsetLeft] = useState(0)
 
   // cung 1 thoi diem chi co 1 phan tu dang dc keo (column or card)
   const [activeDragItemId, setActiveDragItemId] = useState(null)
@@ -51,9 +56,30 @@ function BoardContent({ board, users, documents }) {
   useEffect(() => {
     setOrderedColumns(mapOrder(board?.columns, board?.columnOrderIds, '_id'))
   }, [board])
-  // useEffect(() => {
-  //   setOrderedCards(mapOrder(board?.columns?.cards, board?.columns?.cardOrderIds, '_id'))
-  // }, [board?.columns])
+  useEffect(() => {
+    // setOrderedCards(mapOrder(board?.columns?.cards, board?.columns?.cardOrderIds, '_id'))
+  }, [boardData])
+
+  function createCard(boardDataNew ) {
+
+    // boardData.columns[columnIndex].cards = cardDataNew
+
+    setBoardData(boardDataNew)
+  }
+
+  // function deleteCard(id) {
+  //   const newTasks = tasks.filter((task) => task.id !== id);
+  //   setCard(newTasks);
+  // }
+
+  // function updateCard(id, content) {
+  //   const newTasks = tasks.map((task) => {
+  //     if (task.id !== id) return task;
+  //     return { ...task, content };
+  //   });
+
+  //   setTasks(newTasks);
+  // }
 
   // tim 1 cai column theo cardId
   const findColumnByCardId = (cardId) => {
@@ -120,7 +146,7 @@ function BoardContent({ board, users, documents }) {
   }
 
   const handleDragStart = (event) => {
-    // console.log( 'handlDragStart: ', event)
+    console.log( 'handlDragStart: ', event)
     setActiveDragItemId(event?.active?.id)
     setActiveDragItemType(event?.active?.data?.current?.columnId ? ACTIVE_DRAG_ITEM_TYPE.CARD : ACTIVE_DRAG_ITEM_TYPE.COLUMN)
     setActiveDragItemTypeData(event?.active?.data?.current)
@@ -130,6 +156,11 @@ function BoardContent({ board, users, documents }) {
       setOldColumnWhenDraggingCard(findColumnByCardId(event?.active?.id))
     }
   }
+
+  const handleDragMove = (delta) => {
+    setOffsetLeft(delta.x)
+  }
+
 
   // Trigger trong qua trinh keo 1 phan tu
   const handleDragOver = (event) => {
@@ -188,19 +219,20 @@ function BoardContent({ board, users, documents }) {
       const activeColumn = findColumnByCardId(activeDraggingCardId)
       const overColumn = findColumnByCardId(overCardId)
 
-      const activeCard = findCardByChildrenId(active.id)
-      const overCard = findCardByChildrenId(over.id)
+      // const activeCard = findCardByChildrenId(active.id)
+      // const overCard = findCardByChildrenId(over.id)
 
 
-      console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
-      console.log('xu ly keo tha card end active: ', active.id)
-      console.log('xu ly keo tha card end over: ', over)
-      console.log('xu ly keo tha card end activeCard: ', activeCard)
-      console.log('xu ly keo tha card end overCard: ', overCard)
+      // console.log('xu ly keo tha card end orderedColumns: ', orderedColumns)
+      // console.log('xu ly keo tha card end active: ', active)
+      // console.log('xu ly keo tha card end over: ', over)
+      // console.log('xu ly keo tha card end event: ', event)
+      // console.log('xu ly keo tha card end activeCard: ', activeCard)
+      // console.log('xu ly keo tha card end overCard: ', overCard)
 
       if (!activeColumn || !overColumn) return
       if (oldColumnWhenDraggingCard._id !== overColumn._id) {
-        // console.log('hanh dong keo tha card giua 2 column khac nhau')
+        console.log('hanh dong keo tha card giua 2 column khac nhau')
         // hanh dong keo tha card giua 2 column khac nhau
         moveCardBetweenDifferentColumns(
           overColumn,
@@ -212,7 +244,7 @@ function BoardContent({ board, users, documents }) {
           activeDraggingCardData
         )
       } else {
-        // console.log('hanh dong keo tha card trong cung 1 column')
+        console.log('hanh dong keo tha card trong cung 1 column')
 
         // hanh dong keo tha card trong cung 1 column
 
@@ -283,6 +315,7 @@ function BoardContent({ board, users, documents }) {
       sensors={mySensors}
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
+      // onDragMove={handleDragMove}
       onDragOver={handleDragOver}
       onDragEnd={handleDragEnd}
     >
@@ -297,10 +330,10 @@ function BoardContent({ board, users, documents }) {
           <Box sx={{
             display: 'flex'
           }}>
-            <ListColumns setOrderedColumns={setOrderedColumns} columns={orderedColumns} board={board} />
+            <ListColumns setOrderedColumns={setOrderedColumns} columns={orderedColumns} board={boardData} createCard={createCard} />
             <DragOverlay dropAnimation={customDropAnimation}>
               {!activeDragItemType && null}
-              {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} />}
+              {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemTypeData} board={boardData} createCard={createCard} />}
               {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.CARD) && <CardTask card={activeDragItemTypeData} />}
             </DragOverlay>
           </Box>

@@ -139,12 +139,12 @@ function CardTask({ card, index }) {
     for (let i = 0; i < files.length; i++) {
       const file = files[i]
       // if (file.type.match(imageTypeRegex)) {
-        validImageFiles.push(file)
+      validImageFiles.push(file)
       // }
     }
     if (validImageFiles.length) {
       setImageFiles(validImageFiles)
-      
+
 
       return
     }
@@ -287,7 +287,7 @@ function CardTask({ card, index }) {
 
     <Box>
       <Card
-        ref={setNodeRef} style={dndKitCardStyle} {...attributes} 
+        ref={setNodeRef} style={dndKitCardStyle} 
         sx={{
           cursor: 'pointer',
           boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
@@ -306,7 +306,7 @@ function CardTask({ card, index }) {
             height: '100%',
             // mr: 1
           }} onClick={handleOpenTaskColor}>
-          <Box {...listeners} sx={{
+          <Box {...attributes} {...listeners} sx={{
             // display: 'flex',
             backgroundColor: TaskColor,
             width: '30px',

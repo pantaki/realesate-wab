@@ -278,7 +278,7 @@ function Children({ ChildrentCard }) {
     <Box>
 
       <Card
-        ref={setNodeRef} style={dndKitCardStyle} {...attributes} {...listeners}
+        ref={setNodeRef} style={dndKitCardStyle} {...attributes}
         sx={{
           cursor: 'pointer',
           boxShadow: '0 1px 1px rgba(0,0,0,0.2)',
@@ -291,7 +291,7 @@ function Children({ ChildrentCard }) {
           position: 'relative',
           // '&:hover': { opacity: '0.7'}
         }}>
-        <Box
+        <Box {...listeners}
           sx={{
             width: '35px',
             height: '100%',
